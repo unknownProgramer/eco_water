@@ -1,43 +1,58 @@
 const express = require('express');
 const router = express.Router();
-const puppeteer = require('puppeteer');
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const DOMParser = require('dom-parser');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // async function main() {
-  //   const browser = await puppeteer.launch(); // ❶ 헤드리스 브라우저 실행
-  //   const page = await browser.newPage();     // ❷ 브라우저에 새 페이지 생성
-  //
-  //   const pageUrl = 'https://www.water.or.kr/realtime/sub01/sub01/dam/hydr.do?s_mid=1323&seq=1408&p_group_seq=1407&menu_mode=3&damcd=5002201';
-  //   await page.goto(pageUrl, {
-  //     // domcontentloaded : 메인 HTML이 로드되어 DOM이 생성된 순간까지 기다립니다. 포함된 리소스의 로드는 기다리지 않기 때문에 찾는 내용이 메인 HTML 자체에 존재하는 경우 유용합니다.
-  //     // load : 메인 HTML과 포함된 자바스크립트, CSS, 이미지 등 모든 리소스가 로드될 때까지 기다립니다.
-  //     // networkidle0 : 최소 500ms 동안 활성화된 네트워크 연결이 완전히 없어질 때까지 기다립니다. 자바스크립트를 사용한 API 요청이 있는 페이지에 유용합니다.
-  //     // networkidle2 : 최소 500ms 동안 활성화된 네트워크 연결이 2개 이하로 유지될 때까지 기다립니다. 웹페이지 로드가 완료된 이후에도 주기적으로 정보를 업데이트하는 등 폴링 방식으로 구현된 웹페이지에 적용하면 유용합니다.
-  //     waitUntil: 'load',
-  //   });
-  //
-  //   // // ➍ 제목/내용 불러오기 버튼을 클릭
-  //   // await page.click('input[type="button"]');
-  //   //
-  //   // await page.waitForFunction(() => {
-  //   //   // ➎ 함수가 웹브라우저의 컨텍스트에서 실행되기 때문에 document 객체에 접근 가능
-  //   //   return document.getElementById('tui-grid-cell-content').textContent.length > 0;
-  //   // });
-  //
-  //   // ➏ 특정 셀렉터에 대해 제공된 함수를 수행한 값 반환
-  //   const content = await page.$eval(
-  //       '.tui-grid-cell-content',
-  //       (elements) => elements[0].textContent,
-  //   );
-  //
-  //   console.log(content);
-  //   await browser.close(); // ➐ 작업이 완료되면 브라우저 종료
-  // }
 
-  main();
+  const xhr = new XMLHttpRequest();
+  const url = 'http://apis.data.go.kr/B500001/drghtDamOper/operInfoList'; /*URL*/
 
-  res.render('index', { title: 'Express' });
+  let date = new Date();
+  let year = date.getFullYear();
+  let month = ('0' + (date.getMonth() + 1)).slice(-2);
+  let day = ('0' + date.getDate()).slice(-2);
+  let from_day = ('0' + (date.getDate()-7)).slice(-2);
+  let today = year  + month  + day;
+  let one_week_ago = year + month + from_day;
+
+  console.log(today);
+  let queryParams = '?' + encodeURIComponent('serviceKey') + '='+'aCs1kGLS2Mh2wNOCgLD4I%2F6Ik5FrsGqelp6sfs6QQXFBNZIfX20PeOiqelkvYd5E5fiCD8mS25RMd9oH6KKvbA%3D%3D'; /*Service Key*/
+
+  queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); // 페이지 번호
+  queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); // 한 페이지의 결과 수
+  queryParams += '&' + encodeURIComponent('damCd') + '=' + encodeURIComponent('5002201'); // 댐 코드 (평림댐 : 5002201)
+  queryParams += '&' + encodeURIComponent('stDt') + '=' + encodeURIComponent(one_week_ago); // 댐 운영 검색 시작 일자
+  queryParams += '&' + encodeURIComponent('edDt') + '=' + encodeURIComponent(today); // 댐 운영 검색 종료 일자
+
+  xhr.open('GET', url + queryParams);
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+      console.log('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders()));
+
+      // this : 댐 데이터 객체
+      const data = this.responseText; // text 형태로 변환
+      let parser = new DOMParser();
+      let xmlDoc = parser.parseFromString(data, "text/xml");
+      let count =  xmlDoc.getElementsByTagName("totalCount")[0].textContent;// javaScript 의 자동 형변환 이용 => 문자열에 숫자 곱하면 숫자됨
+      let list = [];
+      for ( let i = 0 ; i < count ; i ++) {
+        let one_list = []
+        one_list.push(xmlDoc.getElementsByTagName("obsymd")[i].textContent);
+        one_list.push(xmlDoc.getElementsByTagName("lwl")[i].textContent);
+        one_list.push(xmlDoc.getElementsByTagName("rsqty")[i].textContent);
+        one_list.push(xmlDoc.getElementsByTagName("iqty")[i].textContent);
+        one_list.push(xmlDoc.getElementsByTagName("rsrt")[i].textContent);
+        list.push(one_list);
+      }
+      console.log(list);
+      res.render('index', {
+        data : list
+      });
+    }
+  };
+  xhr.send('');
 });
 
 module.exports = router;

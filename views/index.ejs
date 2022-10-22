@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>TEST</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      td {
+        width: 100px;
+        height: 30px;
+        border: 1px black solid;
+      }
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <h3>1주일간 평림댐 데이터</h3>
+  <table>
+    <th>
+      <tr>
+      <td>일자</td>
+      <td>항목 01</td>
+      <td>항목 02</td>
+      <td>항목 03</td>
+      <td>항목 04</td>
+    </tr>
+    </th>
+    <tbody>
+    <% for (let i = 0 ; i < data.length ; i ++) { %>
+      <tr>
+        <td><%=data[i][0]%></td>
+        <td><%=data[i][1]%></td>
+        <td><%=data[i][2]%></td>
+        <td><%=data[i][3]%></td>
+        <td><%=data[i][4]%></td>
+      </tr>
+    <% } %>
+    </tbody>
+  </table>
   </body>
 </html>
