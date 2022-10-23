@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
   let today = year  + month  + day;
   let one_week_ago = year + month + from_day;
 
-  console.log(today);
   let queryParams = '?' + encodeURIComponent('serviceKey') + '='+'aCs1kGLS2Mh2wNOCgLD4I%2F6Ik5FrsGqelp6sfs6QQXFBNZIfX20PeOiqelkvYd5E5fiCD8mS25RMd9oH6KKvbA%3D%3D'; /*Service Key*/
 
   queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); // 페이지 번호
@@ -29,7 +28,7 @@ router.get('/', function(req, res, next) {
   xhr.open('GET', url + queryParams);
   xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
-      console.log('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders()));
+      console.log('-'.repeat(25) + '\nStatus: '+this.status+'\n데이터 응답성공\n'+ '-'.repeat(25));
 
       // this : 댐 데이터 객체
       const data = this.responseText; // text 형태로 변환
@@ -46,7 +45,6 @@ router.get('/', function(req, res, next) {
         one_list.push(xmlDoc.getElementsByTagName("rsrt")[i].textContent);
         list.push(one_list);
       }
-      console.log(list);
       res.render('index', {
         data : list
       });
