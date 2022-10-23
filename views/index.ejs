@@ -136,7 +136,7 @@
         <div id="gview">
         </div>
         <!-- 담수 3D모델 위치 조정하는 canvas-->
-<!--        <canvas id="canvas"></canvas>-->
+        <canvas id="canvas"></canvas>
         <object data="model">
         </object>
         <div class="progress">
@@ -610,7 +610,14 @@
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
 </script>
-<script src="model.js" type="module"></script>
+<script type="importmap">
+      {
+        "imports": {
+          "three": "./build/three.module.js"
+        }
+      }
+</script>
+<script type="module" src="model.js"></script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

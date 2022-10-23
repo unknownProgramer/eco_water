@@ -1,6 +1,6 @@
-import * as THREE from '/build/three.module.js';
-import { OrbitControls } from  '../node_modules/three/examples/jsm/controls/OrbitControls';
-import { Water } from '../node_modules/three/examples/jsm/objects/Water2';
+import * as THREE from 'three';
+import { OrbitControls } from './jsm/controls/OrbitControls.js';
+import { Water } from './jsm/objects/Water2.js';
 
 let scene, camera, clock, renderer, water;
 let params = {
@@ -32,8 +32,8 @@ function init() {
     //////////////////////
     // texture load
     const loader = new THREE.TextureLoader();
-    const height = loader.load('/assets/depth_img/pd_depth.jpg');
-    const texture = loader.load('/assets/depth_img/pd_depth_color.jpg');
+    const height = loader.load('/depth_img/pd_depth.jpg');
+    const texture = loader.load('/depth_img/pd_depth_color.jpg');
     height.warpS = height.wrapT = THREE.RepeatWrapping;
 
     // 지면 init
@@ -78,7 +78,7 @@ function init() {
     //      CUBE     //
     ///////////////////
     const cubeTextureLoader = new THREE.CubeTextureLoader();
-    cubeTextureLoader.setPath( 'textures/cube/skyboxsun25deg/' );
+    cubeTextureLoader.setPath( 'views/textures/cube/skyboxsun25deg/' );
     const cubeTexture = cubeTextureLoader.load( [
         'px.jpg', 'nx.jpg',
         'py.jpg', 'ny.jpg',
