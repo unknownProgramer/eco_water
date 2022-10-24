@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
         one_list.push(xmlDoc.getElementsByTagName("rsrt")[i].textContent);
         list.push(one_list);
       }
-      console.log(list)
+      console.log(rand_list);
       res.render('index', {
         data : list,
         today : today

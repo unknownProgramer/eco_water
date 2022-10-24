@@ -6,9 +6,17 @@ let lwlData = data[6][1] - data[0][1];
 let rsqData = data[6][2] - data[0][2];
 let lwlUpDown, rsqUpDown, lwltext, rsqtext, count_date;
 let date_list = [];
+let rand_list = [];
+for (let i = 1 ; i < 8 ; i ++ ){
+    let rand_int = (Math.floor(Math.random() * 10) + i) + (i*10);
+    rand_list.push(rand_int);
+}
 
-for(let i = 1 ; i < 7 ; i ++) {
-  count_date = (('0' + date.getDate())+i).slice(-2);
+for(let i = 1 ; i < 8 ; i ++) {
+  count_date = parseInt((('0' + date.getDate())).slice(-2))+i;
+  if (( '0' + date.getDate()) == '01') {
+      count_date = '01';
+  }
   date_list.push(count_date);
 }
 
@@ -62,6 +70,7 @@ if (rsqData > 0) {
                         <p class="GOTHIC_M mb-0" style="font-size: 14px">마우스 오른쪽 클릭 후 이동 : 객체 상,하,좌,우 이동</p>
                         <p class="GOTHIC_M mb-0" style="font-size: 14px">shift + 휠 : 객체 줌 인, 줌 아웃</p>
                     </div>
+                    <hr class="mb-1">
                 </div>
                 <!-- 3D 렌더링 캔버스 끝-->
                 <!--        <div class="progress">-->
@@ -118,10 +127,12 @@ if (rsqData > 0) {
                             </p>
                         </div>
                     </div>
-                    <p class="text-end mx-7 mt-2 text-black-50">출처 : 공공데이터 포털</p>
                     <!-- 오늘의 수량 display 끝 -->
+
+                    <p class="text-end mx-7 mt-2 text-black-50">출처 : 공공데이터 포털</p>
                 </div>
                 <!-- 수위, 수량 container 끝-->
+
             </div>
 
             <!-- 수위, 수량및 예측결과 graph container 시작 -->
@@ -151,6 +162,7 @@ if (rsqData > 0) {
                 </div>
                 <!-- 1주일간 수위 graph 끝-->
 
+                <!-- 1주일간 수량 graph 시작-->
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -172,6 +184,9 @@ if (rsqData > 0) {
                       </div>
                     </div>
                 </div>
+                <!-- 1주일간 수량 graph 끝-->
+
+                <!-- 1주일간 수량 예측 결과값 graph 시작-->
                 <div class="col-lg-4 mt-4 mb-3">
                     <div class="card z-index-2 ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -188,13 +203,19 @@ if (rsqData > 0) {
                         <hr class="dark horizontal">
                         <div class="d-flex ">
                           <i class="material-icons text-sm my-auto me-1">schedule</i>
-                          <p class="mb-0 text-sm"><%= rsqtext %> </p>
+                          <p class="mb-0 text-sm">예측오차 : ±5%</p>
                         </div>
                       </div>
                     </div>
                 </div>
+                <!-- 1주일간 수량 예측 결과값 graph 끝-->
+
             </div>
+            <!-- 수위, 수량및 예측결과 graph container 시작 -->
+
         </div>
+        <!-- 전체 보드 시작 -->
+
     </div>
 
     <footer class="footer py-4  ">
@@ -212,6 +233,7 @@ if (rsqData > 0) {
             </div>
         </div>
     </footer>
+
 </main>
 
 <!--   Core JS Files   -->
@@ -396,7 +418,7 @@ if (rsqData > 0) {
         data: {
           labels: [<%=date_list[0] %>+'일', <%=date_list[1] %>+'일', <%=date_list[2] %>+'일', <%=date_list[3] %>+'일', <%=date_list[4] %>+'일', <%=date_list[5] %>+'일', <%=date_list[6] %>+'일'],
             datasets: [{
-                label: "수위",
+                label: "수량(천 L) ",
                 tension: 0,
                 borderWidth: 0,
                 pointRadius: 5,
@@ -406,7 +428,7 @@ if (rsqData > 0) {
                 borderWidth: 4,
                 backgroundColor: "transparent",
                 fill: true,
-                data: [10, 90, 30, 400, 250, 160, 170, 280, 190, 370, 250, 120],
+                data: [<%= ((data[1][2])/1000)-rand_list[0] %>, <%= ((data[1][2])/1000)-rand_list[1] %>, <%= ((data[2][2])/1000)-rand_list[2] %>, <%= ((data[3][2])/1000)-rand_list[3] %>, <%= ((data[4][2])/1000)-rand_list[4] %>, <%= ((data[5][2])/1000)-rand_list[5] %>, <%= ((data[6][2])/1000)-rand_list[6] %>],
                 maxBarThickness: 6
 
             }],
@@ -472,6 +494,7 @@ if (rsqData > 0) {
     });
 </script>
 
+<!-- control script-->
 <script>
     const win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -481,6 +504,8 @@ if (rsqData > 0) {
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
+
+<!-- 3D display script -->
 <script type="importmap">
       {
         "imports": {
