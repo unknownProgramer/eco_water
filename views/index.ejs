@@ -1,350 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
+<%
+let date = new Date();
+let lwlData = data[6][1] - data[0][1];
+let rsqData = data[6][2] - data[0][2];
+let lwlUpDown, rsqUpDown, lwltext, rsqtext, count_date;
+let date_list = [];
+
+for(let i = 1 ; i < 7 ; i ++) {
+  count_date = (('0' + date.getDate())+i).slice(-2);
+  date_list.push(count_date);
+}
+
+if (lwlData > 0) {
+    lwlUpDown = '상승';
+    lwltext = '수위가 평균적으로 상승세에 있습니다.'
+} else {
+    lwlUpDown = '하락';
+    lwltext = '수위가 평균적으로 하락세에 있습니다.'
+    lwlData *= (-1)
+}
+if (rsqData > 0) {
+    rsqUpDown = '상승';
+    rsqtext = '수량이 평균적으로 상승세에 있습니다.'
+} else {
+    rsqUpDown = '하락';
+    rsqtext = '수량이 평균적으로 하락세에 있습니다.'
+    rsqData *= (-1)
+}
+%>
 <head>
-  <%-include ('header.ejs')%>
+    <%- include ('header.ejs') %>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <%-include ('menu.ejs')%>
+<%- include ('menu.ejs') %>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-    <div class="container-fluid py-1 px-3">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-          <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:(0);">Pages</a></li>
-          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">메인</li>
-        </ol>
-        <h6 class="font-weight-bolder mb-0">메인화면</h6>
-      </nav>
-      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group input-group-outline">
-            <label class="form-label">검색</label>
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <ul class="navbar-nav  justify-content-end">
-          <li class="nav-item d-flex align-items-center">
-            <a href="javascript:(0);" class="nav-link text-body font-weight-bold px-0">
-              <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none">로그인</span>
-            </a>
-          </li>
-          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-              <div class="sidenav-toggler-inner">
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item px-3 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body p-0">
-              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown pe-2 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bell cursor-pointer"></i>
-            </a>
-            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-              <li class="mb-2">
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                  <div class="d-flex py-1">
-                    <div class="my-auto">
-                      <img src="img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="text-sm font-weight-normal mb-1">
-                        <span class="font-weight-bold">New message</span> from Laur
-                      </h6>
-                      <p class="text-xs text-secondary mb-0">
-                        <i class="fa fa-clock me-1"></i>
-                        13 minutes ago
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="mb-2">
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                  <div class="d-flex py-1">
-                    <div class="my-auto">
-                      <img src="img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="text-sm font-weight-normal mb-1">
-                        <span class="font-weight-bold">New album</span> by Travis Scott
-                      </h6>
-                      <p class="text-xs text-secondary mb-0">
-                        <i class="fa fa-clock me-1"></i>
-                        1 day
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                  <div class="d-flex py-1">
-                    <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                      <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>credit-card</title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                            <g transform="translate(1716.000000, 291.000000)">
-                              <g transform="translate(453.000000, 454.000000)">
-                                <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="text-sm font-weight-normal mb-1">
-                        Payment successfully completed
-                      </h6>
-                      <p class="text-xs text-secondary mb-0">
-                        <i class="fa fa-clock me-1"></i>
-                        2 days
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- End Navbar -->
+    <!-- 전체 container 시작-->
+    <div class="container-fluid px-2 px-md-4">
 
-  <div class="container-fluid px-2 px-md-4">
-    <div class="page-header min-height-400 border-radius-xl mt-4" style="background-image: url('http://ojsfile.ohmynews.com/STD_IMG_FILE/2022/0617/IE003007580_STD.jpeg');">
-      <span class="mask opacity-6"></span>
-    </div>
-    <div class="card card-body mx-3 mx-md-4 mt-n6">
-      <div class="row gx-4 mb-2">
-        <div class="col-auto my-auto">
+        <!-- 타이틀 시작 -->
+        <div class="page-header min-height-300 border-radius-xl mt-3" style="background-image: url('img/title.jpg');">
+            <span class="mask GOTHIC_M"
+                  style="color: #ffffff; font-size: 48px; font-weight: 500; margin-top: 120px; padding-left: 30px">수위예측 3D 디스플레이 시스템</span>
+            <span class="mask GOTHIC_M" style="color: #000000; font-size: 28px; margin-top: 180px; padding-left: 30px">담수지역 개요</span>
         </div>
-        <div id="gview">
-        </div>
-        <!-- 담수 3D모델 위치 조정하는 canvas-->
-        <canvas id="canvas"></canvas>
-        <object data="model">
-        </object>
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style=" " aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-            여기엔
-            <br>수위 표시
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">water</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">현재 수량</p>
-                <h4 class="mb-0">data</h4>
-              </div>
+        <!-- 타이틀 끝 -->
+
+        <!-- 전체 보드 시작 -->
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="row gx-4 mb-2">
+
+                <!-- 3D 렌더링 캔버스 시작-->
+                <div class="col">
+                    <canvas id="lender_canvas"></canvas>
+                    <hr class="mb-1">
+                    <div class="mx-3 mt-2">
+                        <p class="GOTHIC_M mb-0" style="font-size: 14px">사용법</p>
+                        <p class="GOTHIC_M mb-0" style="font-size: 14px">마우스 왼쪽 클릭 후 이동 : 객체 상,하,좌,우 회전</p>
+                        <p class="GOTHIC_M mb-0" style="font-size: 14px">마우스 오른쪽 클릭 후 이동 : 객체 상,하,좌,우 이동</p>
+                        <p class="GOTHIC_M mb-0" style="font-size: 14px">shift + 휠 : 객체 줌 인, 줌 아웃</p>
+                    </div>
+                </div>
+                <!-- 3D 렌더링 캔버스 끝-->
+                <!--        <div class="progress">-->
+                <!--          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style=" " aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">-->
+                <!--            여기엔-->
+                <!--            <br>수위 표시-->
+                <!--          </div>-->
+                <!--        </div>-->
+                <!-- 수위, 수량 container 시작-->
+                <div class="col">
+                    <div class="card_title mb-5 mt-5 GOTHIC_M" style="text-align: center">
+                        <h1>현재 수량 및 수위 정보</h1>
+                        <h3><%= today.slice(0, -4) %>년 <%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준</h3>
+                    </div>
+
+                    <!-- 오늘의 수위 display -->
+                    <div class="card mx-7 GOTHIC_M">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">water</i>
+                            </div>
+                            <div class="text-end pt-0">
+                                <p class="text-xl mb-0">현재 수위</p>
+                                <h4 class="mb-0"><b style="color: #0d6efd"><%= data[6][1] %></b> m</h4>
+                                <p class="text-sm mb-0 text-black-50">(최저지점 기준)</p>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0">1주 전에 비해 <span
+                                        class="text-success text-sm font-weight-bolder"><%= lwlData.toFixed(2) %>m</span> <%= lwlUpDown %>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 오늘의 수위 display 끝 -->
+
+                    <!-- 오늘의 수량 display -->
+                    <div class="card mt-5 mx-7 GOTHIC_M">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">water</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-xl mb-0">현재 수량</p>
+                                <h4 class="mb-0">약 <b style="color: #0d6efd"><%= (data[6][2]).toLocaleString() %></b> L
+                                </h4>
+                                <p class="text-sm mb-0 text-black-50">(자정 기준)</p>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0">1주 전에 비해 약 <span
+                                        class="text-success text-sm font-weight-bolder"><%= rsqData.toLocaleString() %>L</span> <%= rsqUpDown %>
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-end mx-7 mt-2 text-black-50">출처 : 공공데이터 포털</p>
+                    <!-- 오늘의 수량 display 끝 -->
+                </div>
+                <!-- 수위, 수량 container 끝-->
             </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0">어제에 비해 <span class="text-success text-sm font-weight-bolder">data </span>상승</p>
+
+            <!-- 수위, 수량및 예측결과 graph container 시작 -->
+            <div class="row mt-4 pt-10">
+
+                <!-- 1주일간 수위 graph 시작-->
+                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2 ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-info shadow-primary border-radius-lg py-3 pe-1">
+                                <div class="chart">
+                                    <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 지난
+                                1주일간 <b style="color: #4caf50">수위변화</b></h6>
+                            <p class="text-sm GOTHIC_M text-black-50">(최저지점 기준)</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                              <p class="mb-0 text-sm"><%= lwltext %> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 1주일간 수위 graph 끝-->
+
+                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2  ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-info shadow-success border-radius-lg py-3 pe-1">
+                                <div class="chart">
+                                    <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                      <div class="card-body">
+                        <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 지난
+                          1주일간 <b style="color: #4caf50">수량변화</b></h6>
+                        <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
+                        <hr class="dark horizontal">
+                        <div class="d-flex ">
+                          <i class="material-icons text-sm my-auto me-1">schedule</i>
+                          <p class="mb-0 text-sm"><%= rsqtext %> </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4 mb-3">
+                    <div class="card z-index-2 ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+                                <div class="chart">
+                                    <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                      <div class="card-body">
+                        <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 향후
+                          1주일간 <b style="color: #0d6efd">수량예측 결과</b></h6>
+                        <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
+                        <hr class="dark horizontal">
+                        <div class="d-flex ">
+                          <i class="material-icons text-sm my-auto me-1">schedule</i>
+                          <p class="mb-0 text-sm"><%= rsqtext %> </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="nav-wrapper position-relative end-0">
-          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-light shadow-card border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">설명</h6>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-      </div>
     </div>
-  </div>
-  </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-lg-4 col-md-6 mt-4 mb-4">
-      <div class="card z-index-2 ">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div class="bg-gradient-info shadow-primary border-radius-lg py-3 pe-1">
-            <div class="chart">
-              <canvas id="chart-bars" class="chart-canvas" height="170" ></canvas>
+
+    <footer class="footer py-4  ">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="copyright text-center text-sm text-muted text-lg-start">
+                        Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        ECOPEACE All Right Reserved.
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="card-body">
-          <h6 class="mb-0 ">1번정보</h6>
-          <p class="text-sm ">현재 수질정보</p>
-          <hr class="dark horizontal">
-          <div class="d-flex ">
-            <i class="material-icons text-sm my-auto me-1">schedule</i>
-            <p class="mb-0 text-sm">정보 </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 mt-4 mb-4">
-      <div class="card z-index-2  ">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div class="bg-gradient-info shadow-success border-radius-lg py-3 pe-1">
-            <div class="chart">
-              <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h6 class="mb-0 "> 2번정보 </h6>
-          <p class="text-sm "> 현재 물정보 </p>
-          <hr class="dark horizontal">
-          <div class="d-flex ">
-            <i class="material-icons text-sm my-auto me-1">schedule</i>
-            <p class="mb-0 text-sm"> 정보 </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mt-4 mb-3">
-      <div class="card z-index-2 ">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-            <div class="chart">
-              <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h6 class="mb-0 ">3번 정보</h6>
-          <p class="text-sm ">정보</p>
-          <hr class="dark horizontal">
-          <div class="d-flex ">
-            <i class="material-icons text-sm my-auto me-1">schedule</i>
-            <p class="mb-0 text-sm">정보 기입</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer class="footer py-4  ">
-    <div class="container-fluid">
-      <div class="row align-items-center justify-content-lg-between">
-        <div class="col-lg-6 mb-lg-0 mb-4">
-          <div class="copyright text-center text-sm text-muted text-lg-start">
-            © <script>
-              document.write(new Date().getFullYear())
-            </script>
-            Project made by <strong>김강훈</strong>, 최낙현, 황인성, 최석재, 정세빈
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-            <li class="nav-item">
-              <a href="#" class="nav-link text-muted" target="_blank">만든사람들</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-muted" target="_blank">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-muted" target="_blank">홈페이지</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link pe-0 text-muted" target="_blank">고객지원</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 </main>
-<div class="fixed-plugin">
-  <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-    <i class="material-icons py-2">settings</i>
-  </a>
-  <div class="card shadow-lg">
-    <div class="card-header pb-0 pt-3">
-      <div class="float-start">
-        <h5 class="mt-3 mb-0">Material UI Configurator</h5>
-        <p>See our dashboard options.</p>
-      </div>
-      <div class="float-end mt-4">
-        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-          <i class="material-icons">clear</i>
-        </button>
-      </div>
-      <!-- End Toggle Button -->
-    </div>
-    <hr class="horizontal dark my-1">
-    <div class="card-body pt-sm-3 pt-0">
-      <!-- Sidebar Backgrounds -->
-      <div>
-        <h6 class="mb-0">Sidebar Colors</h6>
-      </div>
-      <a href="javascript:void(0)" class="switch-trigger background-color">
-        <div class="badge-colors my-2 text-start">
-          <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-          <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-        </div>
-      </a>
-      <!-- Sidenav Type -->
-      <div class="mt-3">
-        <h6 class="mb-0">Sidenav Type</h6>
-        <p class="text-sm">Choose between 2 different sidenav types.</p>
-      </div>
-      <div class="d-flex">
-        <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
-        <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
-        <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-      </div>
-      <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-      <!-- Navbar Fixed -->
-      <div class="mt-3 d-flex">
-        <h6 class="mb-0">Navbar Fixed</h6>
-        <div class="form-check form-switch ps-0 ms-auto my-auto">
-          <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-        </div>
-      </div>
-      <hr class="horizontal dark my-3">
-      <div class="mt-2 d-flex">
-        <h6 class="mb-0">Light / Dark</h6>
-        <div class="form-check form-switch ps-0 ms-auto my-auto">
-          <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-        </div>
-      </div>
-      <hr class="horizontal dark my-sm-4">
-      <a class="btn bg-gradient-info w-100" href="#">Free Download</a>
-      <a class="btn btn-outline-dark w-100" href="#">View documentation</a>
-      <div class="w-100 text-center">
-        <a class="github-button" href="#" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
-        <h6 class="mt-3">Thank you for sharing!</h6>
-        <a href="#" class="btn btn-dark mb-0 me-2" target="_blank">
-          <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-        </a>
-        <a href="#" class="btn btn-dark mb-0 me-2" target="_blank">
-          <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!--   Core JS Files   -->
 <script src="js/core/popper.min.js"></script>
@@ -352,263 +220,266 @@
 <script src="js/plugins/perfect-scrollbar.min.js"></script>
 <script src="js/plugins/smooth-scrollbar.min.js"></script>
 <script src="js/plugins/chartjs.min.js"></script>
+
+<!-- Graph script -->
 <script>
-  const ctx = document.getElementById("chart-bars").getContext("2d");
+    let date = new Date();
+    const ctx = document.getElementById("chart-bars").getContext("2d");
 
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["월", "화", "수", "목", "금", "토", "일","추가","추가"],
-      datasets: [{
-        label: "수량 ",
-        tension: 0.4,
-        borderWidth: 0,
-        borderRadius: 4,
-        borderSkipped: false,
-        backgroundColor: "rgba(255, 255, 255, .8)",
-        data: [50, 20, 10, 22, 50, 10, 40],
-        maxBarThickness: 8
-      }, ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-            color: 'rgba(255, 255, 255, .2)'
-          },
-          ticks: {
-            suggestedMin: 0,
-            suggestedMax: 500,
-            beginAtZero: true,
-            padding: 10,
-            font: {
-              size: 14,
-              weight: 300,
-              family: "Roboto",
-              style: 'normal',
-              lineHeight: 2
-            },
-            color: "#fff"
-          },
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: [<%= (data[0][0]).slice(-2) %>+'일', <%= (data[1][0]).slice(-2) %>+'일', <%= (data[2][0]).slice(-2) %>+'일', <%= (data[3][0]).slice(-2) %>+'일', <%= (data[4][0]).slice(-2) %>+'일', <%= (data[5][0]).slice(-2) %>+'일', <%= (data[6][0]).slice(-2) %>+'일'],
+            datasets: [{
+                label: "수위 ",
+                tension: 10,
+                borderWidth: 0,
+                borderRadius: 1,
+                borderSkipped: false,
+                backgroundColor: "rgba(255, 255, 255, .8)",
+                data: [<%= data[0][1] %>, <%= data[1][1] %>, <%= data[2][1] %>, <%= data[3][1] %>, <%= data[4][1] %>, <%= data[5][1] %>, <%= data[6][1] %>],
+                maxBarThickness: 8
+            },],
         },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-            borderWidth: 10,
-            color: 'rgba(255, 255, 255, .2)'
-          },
-          ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-              size: 14,
-              weight: 300,
-              family: "Roboto",
-              style: 'normal',
-              lineHeight: 2
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
             },
-          }
-        },
-      },
-    },
-  });
-
-
-  const ctx2 = document.getElementById("chart-line").getContext("2d");
-
-  new Chart(ctx2, {
-    type: "line",
-    data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [{
-        label: "수위",
-        tension: 0,
-        borderWidth: 0,
-        pointRadius: 5,
-        pointBackgroundColor: "rgba(255, 255, 255, .8)",
-        pointBorderColor: "transparent",
-        borderColor: "rgba(255, 255, 255, .8)",
-        borderColor: "rgba(255, 255, 255, .8)",
-        borderWidth: 4,
-        backgroundColor: "transparent",
-        fill: true,
-        data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-        maxBarThickness: 6
-
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-            color: 'rgba(255, 255, 255, .2)'
-          },
-          ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-              size: 14,
-              weight: 300,
-              family: "Roboto",
-              style: 'normal',
-              lineHeight: 2
+            interaction: {
+                intersect: false,
+                mode: 'index',
             },
-          }
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-            borderDash: [5, 5]
-          },
-          ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-              size: 14,
-              weight: 300,
-              family: "Roboto",
-              style: 'normal',
-              lineHeight: 2
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [3, 5],
+                        color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                        suggestedMin: 100,
+                        suggestedMax: 105,
+                        beginAtZero: false,
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                        color: "#fff"
+                    },
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                        borderWidth: 10,
+                        color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
             },
-          }
         },
-      },
-    },
-  });
+    });
 
-  const ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
 
-  new Chart(ctx3, {
-    type: "line",
-    data: {
-      labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-      datasets: [{
-        label: "수위",
-        tension: 0,
-        borderWidth: 0,
-        pointRadius: 5,
-        pointBackgroundColor: "rgba(255, 255, 255, .8)",
-        pointBorderColor: "transparent",
-        borderColor: "rgba(255, 255, 255, .8)",
-        borderWidth: 4,
-        backgroundColor: "transparent",
-        fill: true,
-        data: [10, 90, 30, 400, 250, 160, 170, 280, 190, 370, 250, 120],
-        maxBarThickness: 6
+    const ctx2 = document.getElementById("chart-line").getContext("2d");
 
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-            color: 'rgba(255, 255, 255, .2)'
-          },
-          ticks: {
-            display: true,
-            padding: 10,
-            color: '#f8f9fa',
-            font: {
-              size: 14,
-              weight: 300,
-              family: "Roboto",
-              style: 'normal',
-              lineHeight: 2
+    new Chart(ctx2, {
+        type: "line",
+        data: {
+          labels: [<%= (data[0][0]).slice(-2) %>+'일', <%= (data[1][0]).slice(-2) %>+'일', <%= (data[2][0]).slice(-2) %>+'일', <%= (data[3][0]).slice(-2) %>+'일', <%= (data[4][0]).slice(-2) %>+'일', <%= (data[5][0]).slice(-2) %>+'일', <%= (data[6][0]).slice(-2) %>+'일'],
+            datasets: [{
+                label: "수량(천 L) ",
+                tension: 0,
+                borderWidth: 0,
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                pointBorderColor: "transparent",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderWidth: 4,
+                backgroundColor: "transparent",
+                fill: true,
+                data: [<%= (data[0][2])/1000 %>, <%= (data[1][2])/1000 %>, <%= (data[2][2])/1000 %>, <%= (data[3][2])/1000 %>, <%= (data[4][2])/1000 %>, <%= (data[5][2])/1000 %>, <%= (data[6][2])/1000 %>],
+                maxBarThickness: 6
+
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
             },
-          }
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-            borderDash: [5, 5]
-          },
-          ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-              size: 14,
-              weight: 300,
-              family: "Roboto",
-              style: 'normal',
-              lineHeight: 2
+            interaction: {
+                intersect: false,
+                mode: 'index',
             },
-          }
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                        color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+            },
         },
-      },
-    },
-  });
+    });
+
+    const ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+    new Chart(ctx3, {
+        type: "line",
+        data: {
+          labels: [<%=date_list[0] %>+'일', <%=date_list[1] %>+'일', <%=date_list[2] %>+'일', <%=date_list[3] %>+'일', <%=date_list[4] %>+'일', <%=date_list[5] %>+'일', <%=date_list[6] %>+'일'],
+            datasets: [{
+                label: "수위",
+                tension: 0,
+                borderWidth: 0,
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                pointBorderColor: "transparent",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderWidth: 4,
+                backgroundColor: "transparent",
+                fill: true,
+                data: [10, 90, 30, 400, 250, 160, 170, 280, 190, 370, 250, 120],
+                maxBarThickness: 6
+
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index',
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                        color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                        display: true,
+                        padding: 10,
+                        color: '#f8f9fa',
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#f8f9fa',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+            },
+        },
+    });
 </script>
 
 <script>
-  const win = navigator.platform.indexOf('Win') > -1;
-  if (win && document.querySelector('#sidenav-scrollbar')) {
-    const options = {
-      damping: '0.5'
+    const win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        const options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-  }
 </script>
 <script type="importmap">
       {
@@ -616,157 +487,162 @@
           "three": "./build/three.module.js"
         }
       }
+
 </script>
 <script type="module">
-  import * as THREE from 'three';
-  import { OrbitControls } from './jsm/controls/OrbitControls.js';
-  import { Water } from './jsm/objects/Water2.js';
+    import * as THREE from 'three';
+    import {OrbitControls} from './jsm/controls/OrbitControls.js';
+    import {Water} from './jsm/objects/Water2.js';
 
-  let scene, camera, clock, renderer, water;
-  let params = {
-    '담수 색상': '#ffffff',
-    '담수 높이' : 40
-  };
-  init();
-  animate();
-  function init() {
-    ///////////////////
-    //     SCENE     //
-    ///////////////////
-    scene = new THREE.Scene();
+    let scene, camera, clock, renderer, water;
+    let params = {
+        '담수 색상': '#ffffff',
+        '담수 높이': 40
+    };
+    init();
+    animate();
 
-    /////////////////////
-    //      CAMERA     //
-    /////////////////////
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-    camera.position.set( 150, 175, 0 );
-    camera.lookAt( scene.position );
+    function init() {
+        ///////////////////
+        //     SCENE     //
+        ///////////////////
+        scene = new THREE.Scene();
 
-    ///////////////////
-    //     CLOCK     //
-    ///////////////////
-    clock = new THREE.Clock();
+        /////////////////////
+        //      CAMERA     //
+        /////////////////////
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(150, 100, 25);
+        camera.lookAt(scene.position);
 
-    //////////////////////
-    //     GEOMETRY     //
-    //////////////////////
-    // texture load
-    const loader = new THREE.TextureLoader();
-    const height = loader.load('/depth_img/pd_depth.jpg');
-    const texture = loader.load('/depth_img/pd_depth_color.jpg');
-    height.warpS = height.wrapT = THREE.RepeatWrapping;
+        ///////////////////
+        //     CLOCK     //
+        ///////////////////
+        clock = new THREE.Clock();
 
-    // 지면 init
-    const geometry = new THREE.PlaneGeometry(256, 256, 64, 64) // segments 가 높을수록 더 세밀한 오브젝트 생성이 가능
+        //////////////////////
+        //     GEOMETRY     //
+        //////////////////////
+        // texture load
+        const loader = new THREE.TextureLoader();
+        const height = loader.load('/depth_img/pd_depth.jpg');
+        const texture = loader.load('/depth_img/pd_depth_color.jpg');
+        height.warpS = height.wrapT = THREE.RepeatWrapping;
 
-    // 저수지 수심 init ( wireframe : 격자표현 )
-    const material = new THREE.MeshStandardMaterial({
-      color          : '#ffffff',
-      map            : texture,
-      displacementMap: height,
-      // wireframe: true,
-      displacementScale: 64
-    });
-    material.side = THREE.DoubleSide;
+        // 지면 init
+        const geometry = new THREE.PlaneGeometry(256, 256, 64, 64) // segments 가 높을수록 더 세밀한 오브젝트 생성이 가능
 
-    // 지면 객체 init
-    const plane = new THREE.Mesh(geometry, material);
+        // 저수지 수심 init ( wireframe : 격자표현 )
+        const material = new THREE.MeshStandardMaterial({
+            color: '#ffffff',
+            map: texture,
+            displacementMap: height,
+            // wireframe: true,
+            displacementScale: 64
+        });
+        material.side = THREE.DoubleSide;
 
-    // 지면 객체 위치조정
-    plane.rotation.x = -Math.PI / 2;
+        // 지면 객체 init
+        const plane = new THREE.Mesh(geometry, material);
 
-    // 지면 객체 추가
-    scene.add(plane);
+        // 지면 객체 위치조정
+        plane.rotation.x = -Math.PI / 2;
 
-    ///////////////////
-    //     WATER     //
-    ///////////////////
-    const waterGeometry = new THREE.PlaneGeometry( 256, 256 );
+        // 지면 객체 추가
+        scene.add(plane);
 
-    water = new Water( waterGeometry, {
-      color : params["담수 색상"],
-      scale : 1,
-      flowDirection : new THREE.Vector2( 1, 1 ),
-      textureWidth : 128,
-      textureHeight : 128
-    } );
-    water.position.y = params["담수 높이"];
-    water.rotation.x = Math.PI * - 0.5;
-    scene.add( water );
+        ///////////////////
+        //     WATER     //
+        ///////////////////
+        const waterGeometry = new THREE.PlaneGeometry(256, 256);
 
-    ///////////////////
-    //      CUBE     //
-    ///////////////////
-    const cubeTextureLoader = new THREE.CubeTextureLoader();
-    // cubeTextureLoader.setPath( '/skyboxsun25deg/' );
-    const cubeTexture = cubeTextureLoader.load( [
-      'skyboxsun25deg/px.jpg', 'skyboxsun25deg/nx.jpg',
-      'skyboxsun25deg/py.jpg', 'skyboxsun25deg/ny.jpg',
-      'skyboxsun25deg/pz.jpg', 'skyboxsun25deg/nz.jpg'
-    ] );
-    scene.background = cubeTexture;
+        water = new Water(waterGeometry, {
+            color: params["담수 색상"],
+            scale: 1,
+            flowDirection: new THREE.Vector2(1, 1),
+            textureWidth: 128,
+            textureHeight: 128
+        });
+        water.position.y = params["담수 높이"];
+        water.rotation.x = Math.PI * -0.5;
+        scene.add(water);
 
-    ///////////////////
-    //     LIGHT     //
-    ///////////////////
-    const ambientLight = new THREE.AmbientLight(0xf0f0f0);
-    scene.add( ambientLight );
+        ///////////////////
+        //      CUBE     //
+        ///////////////////
+        const cubeTextureLoader = new THREE.CubeTextureLoader();
+        // cubeTextureLoader.setPath( '/skyboxsun25deg/' );
+        const cubeTexture = cubeTextureLoader.load([
+            'skyboxsun25deg/px.jpg', 'skyboxsun25deg/nx.jpg',
+            'skyboxsun25deg/py.jpg', 'skyboxsun25deg/ny.jpg',
+            'skyboxsun25deg/pz.jpg', 'skyboxsun25deg/nz.jpg'
+        ]);
+        scene.background = cubeTexture;
 
-    const directionalLight = new THREE.DirectionalLight(0x808080, 1.0);
-    directionalLight.position.set( 2, 2, 3 );
-    scene.add( directionalLight );
+        ///////////////////
+        //     LIGHT     //
+        ///////////////////
+        const ambientLight = new THREE.AmbientLight(0xf0f0f0);
+        scene.add(ambientLight);
 
-    //////////////////////
-    //     RENDERER     //
-    //////////////////////
-    // const renderer = new THREE.WebGLRenderer({canvas});
-    const canvas = document.querySelector('#canvas');
-    renderer = new THREE.WebGLRenderer( { canvas } );
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.setPixelRatio( window.devicePixelRatio );
-    // document.body.appendChild( renderer.domElement );
-    // const renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true});
+        const directionalLight = new THREE.DirectionalLight(0x808080, 1.0);
+        directionalLight.position.set(2, 2, 3);
+        scene.add(directionalLight);
 
-    // renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setSize(700,500);
-    // document.body.appendChild(renderer.domElement);
+        //////////////////////
+        //     RENDERER     //
+        //////////////////////
+        // const renderer = new THREE.WebGLRenderer({canvas});
+        const canvas = document.querySelector('#lender_canvas');
+        renderer = new THREE.WebGLRenderer({canvas});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        // document.body.appendChild( renderer.domElement );
+        // const renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true});
 
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap;
+        // renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(840, 480);
+        // document.body.appendChild(renderer.domElement);
 
-    /////////////////
-    //     GUI     //
-    /////////////////
-    // const gui = new GUI();
-    // gui.addColor( params, '담수 색상' ).onChange( function ( value ) {
-    //   water.material.uniforms[ 'color' ].value.set( value );
-    // } );
-    // gui.add( params, '담수 높이', 25, 50, 0.5 ).onChange( function ( value ) {
-    //   water.position.y = value;
-    // });
-    // gui.open();
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
 
-    //////////////////////
-    //     CONTROLS     //
-    //////////////////////
-    const controls = new OrbitControls( camera, renderer.domElement );
-    controls.minDistance = 50;
-    controls.maxDistance = 500;
-    window.addEventListener( 'resize', onWindowResize );
-  }
-  function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-  }
-  function animate() {
-    requestAnimationFrame( animate );
-    // scene.rotation.y += 0.02;
-    render();
-  }
-  function render() {
-    renderer.render( scene, camera );
-  }
+        /////////////////
+        //     GUI     //
+        /////////////////
+        // const gui = new GUI();
+        // gui.addColor( params, '담수 색상' ).onChange( function ( value ) {
+        //   water.material.uniforms[ 'color' ].value.set( value );
+        // } );
+        // gui.add( params, '담수 높이', 25, 50, 0.5 ).onChange( function ( value ) {
+        //   water.position.y = value;
+        // });
+        // gui.open();
+
+        //////////////////////
+        //     CONTROLS     //
+        //////////////////////
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.minDistance = 50;
+        controls.maxDistance = 500;
+        window.addEventListener('resize', onWindowResize);
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        // scene.rotation.y += 0.02;
+        render();
+    }
+
+    function render() {
+        renderer.render(scene, camera);
+    }
 </script>
 
 <!-- Github buttons -->

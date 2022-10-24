@@ -34,19 +34,21 @@ router.get('/', function(req, res, next) {
       const data = this.responseText; // text 형태로 변환
       let parser = new DOMParser();
       let xmlDoc = parser.parseFromString(data, "text/xml");
-      let count =  xmlDoc.getElementsByTagName("totalCount")[0].textContent;// javaScript 의 자동 형변환 이용 => 문자열에 숫자 곱하면 숫자됨
+      // let count =  xmlDoc.getElementsByTagName("totalCount")[0].textContent;// javaScript 의 자동 형변환 이용 => 문자열에 숫자 곱하면 숫자됨
       let list = [];
-      for ( let i = 0 ; i < count ; i ++) {
+      for ( let i = 0 ; i < 7 ; i ++) {
         let one_list = []
         one_list.push(xmlDoc.getElementsByTagName("obsymd")[i].textContent);
         one_list.push(xmlDoc.getElementsByTagName("lwl")[i].textContent);
-        one_list.push(xmlDoc.getElementsByTagName("rsqty")[i].textContent);
+        one_list.push((xmlDoc.getElementsByTagName("rsqty")[i].textContent)*1000000);
         one_list.push(xmlDoc.getElementsByTagName("iqty")[i].textContent);
         one_list.push(xmlDoc.getElementsByTagName("rsrt")[i].textContent);
         list.push(one_list);
       }
+      console.log(list)
       res.render('index', {
-        data : list
+        data : list,
+        today : today
       });
     }
   };

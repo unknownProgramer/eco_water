@@ -73,6 +73,21 @@
   }
 }
 
+@font-face {
+  font-family: 'THE명품고딕L';
+  src: url('../fonts/THEGOTHICL.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'THE명품고딕M';
+  src: url('../fonts/THEGOTHICM.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'THE명품굴림';
+  src: url('../fonts/THEROUND.woff') format('woff');
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -27287,4 +27302,13 @@ pre[class*="language-"] {
   }
 }
 
-/*# sourceMappingURL=dashboard-free.css.map */
+/* custom CSS */
+.GOTHIC_L {
+  font-family: 'THE명품고딕L';
+}
+.GOTHIC_M {
+  font-family: 'THE명품고딕M';
+}
+.GULIM {
+  font-family: 'THE명품굴림';
+}
