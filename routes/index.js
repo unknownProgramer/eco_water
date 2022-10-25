@@ -3,7 +3,6 @@ const router = express.Router();
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const DOMParser = require('dom-parser');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
 
   const xhr = new XMLHttpRequest();
