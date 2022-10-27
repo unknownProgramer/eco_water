@@ -95,12 +95,10 @@
             <!-- 평림댐 정보 시작 -->
             <div class="row gx-4 mb-2 mx-auto">
                 <div class="col-5 mx-5">
-                    <div class="row mb-1" style="background-color: #0d6efd; height: 300px; width: 500px">
-                        평림댐 전경
+                    <div class="row mb-1" style="background-image: url('img/dam.jfif'); height: 300px; width: 500px">
+                        <p>평림댐 전경</p>
                     </div>
-                    <div class="row mt-1" style="background-color: #0d6efd; height: 300px; width: 500px">
-                        평림댐 지도 API
-                    </div>
+                    <div class="row mt-1" id="kakao_map" style="height: 300px; width: 500px"></div>
                 </div>
                 <div class="col-5 mx-3" style="background-color: gray; width: 500px">
                     평림댐 정보 table
@@ -109,7 +107,7 @@
             <!-- 평림댐 정보 끝 -->
 
             <!-- 평림댐 데이터 시작 -->
-            <div class="row gx-4 mb-2" style="height: 700px">
+            <div class="row gx-4 mb-2 mx-auto" style="height: 700px">
                 <div class="col-10 mt-5">
                     <h3 class="GULIM">
                         평림댐 일일 데이터
@@ -127,7 +125,7 @@
                                 수위 (EL.m)
                             </td>
                             <td>
-                                저수량 (㎥)
+                                저수량 (천 ㎥)
                             </td>
                             <td>
                                 유입량 (㎥/s)
@@ -137,17 +135,7 @@
                             </td>
                         </tr>
                         </thead>
-                        <tbody id="contents">
-                            <% for (let i in data) { %>
-                            <tr>
-                                <td><%=(data[i][0]).slice(0,4)%>년 <%=(data[i][0]).slice(4,-2)%>월 <%=(data[i][0]).slice(-2)%>일</td>
-                                <td><%=data[i][1]%></td>
-                                <td><%=data[i][2]%></td>
-                                <td><%=data[i][3]%></td>
-                                <td><%=data[i][4]%></td>
-                            </tr>
-                            <% } %>
-                        </tbody>
+                        <tbody id="contents"></tbody>
                     </table>
                     <nav aria-label="Page navigation">
                         <ul class="pagination" id="pagination" style="justify-content: center; margin-top: 20px"></ul>
@@ -230,7 +218,7 @@
                         contents.append('<tr>' +
                             '<td>' + (data.data[i][0]).slice(0,4) + '년' +  (data.data[i][0]).slice(4,-2) + '월' + (data.data[i][0]).slice(-2) + '일</td>' +
                             '<td>' + data.data[i][1] + '</td>' +
-                            '<td>' + data.data[i][2] + '</td>' +
+                            '<td>' + Math.ceil(data.data[i][2]) + '</td>' +
                             '<td>' + data.data[i][3] + '</td>' +
                             '<td>' + data.data[i][4] + '</td>' +
                             '</tr>');
@@ -239,11 +227,13 @@
                     // 페이지네이션 그리기
                     const pagination = $('#pagination');
                     pagination.empty();
-                    pagination.append('<li class="page-item">' +
-                        '<a class="page-link" aria-label="Previous" id="prev">' +
-                        '<span aria-hidden="true">&laquo;</span>' +
-                        '</a>' +
-                        '</li>');
+                    if (value > 10) {
+                        pagination.append('<li class="page-item">' +
+                            '<a class="page-link" aria-label="Previous" id="prev">' +
+                            '<span aria-hidden="true">&laquo;</span>' +
+                            '</a>' +
+                            '</li>');
+                    }
                     for (let i = first; i <= last ; i ++ ){
                         if ( i == value){
                             pagination.append('<li class="page-item active"><a class="page-link" id="'+ i +'" onclick="getList('+ i +')">'+ i +'</a></li>');
@@ -251,11 +241,13 @@
                             pagination.append('<li class="page-item"><a class="page-link" id="'+ i +'" onclick="getList('+ i +')">'+ i +'</a></li>');
                         }
                     }
-                    pagination.append('<li class="page-item">' +
-                        '<a class="page-link" aria-label="Next" id="next">' +
-                        '<span aria-hidden="true">&raquo;</span>' +
-                        '</a>' +
-                        '</li>');
+                    if (value < 31) {
+                        pagination.append('<li class="page-item">' +
+                            '<a class="page-link" aria-label="Next" id="next">' +
+                            '<span aria-hidden="true">&raquo;</span>' +
+                            '</a>' +
+                            '</li>');
+                    }
 
                     $('.page-link').click(function (e){
                         e.preventDefault();
@@ -277,6 +269,81 @@
         const value = 1;
         getList(value);
     })
+</script>
+
+<!-- kakaoMap JS(library)-->
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=97f87fc27d530467efbdb60ae6f1ea86&libraries=clusterer"></script>
+<script>
+    const mapContainer = document.getElementById('kakao_map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(35.2892497, 126.6847616), // 지도의 중심좌표
+            level: 4 // 지도의 확대 레벨
+        };
+
+    const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+    const mapTypeControl = new kakao.maps.MapTypeControl();
+
+    // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+    // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    // 마커가 표시될 위치입니다
+    const markerPosition = new kakao.maps.LatLng(35.2892497, 126.6847616);
+
+    // 마커를 생성합니다
+    const marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    // 커스텀 오버레이에 표시할 컨텐츠 입니다
+    // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+    // 별도의 이벤트 메소드를 제공하지 않습니다
+    // const content = '<div class="kakao_wrap">' +
+    //     '    <div class="kakao_info">' +
+    //     '        <div class="kakao_title">' +
+    //     '            에코피스 (주)' +
+    //     '            <div class="kakao_close" onclick="closeOverlay()" title="닫기"></div>' +
+    //     '        </div>' +
+    //     '        <div class="kakao_body">' +
+    //     '            <div class="kakao_img">' +
+    //     '                <img src="../images/ecopeace-logo-small.png" width="76" height="71">' +
+    //     '           </div>' +
+    //     '            <div class="kakao_desc">' +
+    //     '                <div class="kakao_ellipsis">광주광역시 북구 첨단벤처소로15번길 7, 1층</div>' +
+    //     '                <div class="kakao_jibun ellipsis">062-431-3351 (지번) 북구 월출동 970-31</div>' +
+    //     '                <div><a href="http://kko.to/jakMybsgF" target="_blank" class="kakao_link">자세히 보기</a></div>' +
+    //     '            </div>' +
+    //     '        </div>' +
+    //     '    </div>' +
+    //     '</div>';
+
+    // 마커 위에 커스텀오버레이를 표시합니다
+    // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+    const overlay = new kakao.maps.CustomOverlay({
+        content: content,
+        map: map,
+        position: marker.getPosition()
+    });
+
+    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+    kakao.maps.event.addListener(marker, 'click', function () {
+        overlay.setMap(map);
+    });
+
+    // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
+    function closeOverlay() {
+        overlay.setMap(null);
+    }
 </script>
 
 <!-- Github buttons -->
