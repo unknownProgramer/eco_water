@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
 <style>
-    td {
+    .info_td {
         width: 200px;
     }
     .progress{
@@ -50,5 +50,33 @@
     .page_button {
         background-color: slategrey;
         cursor: pointer;
+    }
+     .worksTable {
+         width: 100%;
+         border-top: 1px solid #005596;
+         border-bottom: 1px solid #d1d1d1;
+         margin-bottom: 25px;
+         border-collapse: separate;
+         word-break: break-all;
+         border-right: 1px solid #ececec;
+     }
+    .worksTable strong {
+        font-weight: bold;
+    }
+    .worksTable thead th {
+        color: #323232;
+        font-weight: bold;
+        padding: 10px 0;
+        background: #f7f8fb;
+        border-left: 1px solid #ececec;
+    }
+    .worksTable thead th:first-child {
+        border-left: 1px solid #ececec;
+    }
+    .worksTable tr th,
+    .worksTable tr td {
+        border-top: 1px solid #ececec;
+        text-align: center;
+        vertical-align: middle;
     }
 </style>

@@ -93,22 +93,95 @@
         <div class="card card-body mx-3 mx-md-4 mt-n6 GOTHIC_M">
 
             <!-- 평림댐 정보 시작 -->
-            <div class="row gx-4 mb-2 mx-auto">
+            <div class="row gx-4 mb-2 mx-auto mt-7">
                 <div class="col-5 mx-5">
                     <div class="row mb-1" style="background-image: url('img/dam.jfif'); height: 300px; width: 500px">
                         <p>평림댐 전경</p>
                     </div>
                     <div class="row mt-1" id="kakao_map" style="height: 300px; width: 500px"></div>
                 </div>
-                <div class="col-5 mx-3" style="background-color: gray; width: 500px">
-                    평림댐 정보 table
+                <div class="col-5 mx-3">
+                    <table class="worksTable" style="width: 500px;">
+                        <colgroup>
+                            <col class="tbl-col-22">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th class="text-black-50">구분</th>
+                            <td colspan="4">댐 / 평림천 / E.C.R.D</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" class="text-black-50">제원</th>
+                            <th class="text-black-50">높이 (m)</th>
+                            <th class="text-black-50">길이 (m)</th>
+                            <th class="text-black-50">정상표고<br>(EL.m)</th>
+                            <th class="text-black-50">체적 (천m<sup>3</sup>)</th>
+                        </tr>
+                        <tr>
+                            <td>      37.3</td>
+                            <td>     390.5</td>
+                            <td>     116.0</td>
+                            <td>     892.8</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" class="text-black-50">유역</th>
+                            <th colspan="2" class="text-black-50">유역면적 (km<sup>2</sup>)</th>
+                            <th colspan="2" class="text-black-50">연간용수공급용량 (백만m<sup>3</sup>)</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">      19.9</td>
+                            <td colspan="2">      11.8</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="10" class="text-black-50">저수지</th>
+                            <th colspan="2" class="text-black-50">저수면적 (km<sup>2</sup>)</th>
+                            <th colspan="2" class="text-black-50">계획홍수위 (EL.m)</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">       0.9</td>
+                            <td colspan="2">     111.30</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="text-black-50">상시만수위 (EL.m)</th>
+                            <th colspan="2" class="text-black-50">홍수기제한수위 (EL.m)</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">     109.70</td>
+                            <td colspan="2">     109.70</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="text-black-50">월류정표고 (EL.m)</th>
+                            <th colspan="2" class="text-black-50">저수위 (EL.m)</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">     109.70</td>
+                            <td colspan="2">      91.60</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="text-black-50">총 저수용량 (백만m<sup>3</sup>)</th>
+                            <th colspan="2" class="text-black-50">유효 저수량 (백만m<sup>3</sup>)</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">      10.3</td>
+                            <td colspan="2">       8.1</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="text-black-50">홍수 조절용량 (백만m<sup>3</sup>)</th>
+                            <th colspan="2" class="text-black-50">사업기간</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">       0.0</td>
+                            <td colspan="2"> ~ </td>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
             <!-- 평림댐 정보 끝 -->
 
             <!-- 평림댐 데이터 시작 -->
             <div class="row gx-4 mb-2 mx-auto" style="height: 800px">
-                <div class="col-10 mt-5">
+                <div class="col-10 mt-5 mx-auto">
                     <h3 class="GULIM">
                         평림댐 일일 데이터
                     </h3>
@@ -118,19 +191,19 @@
                     <table class="table" style="text-align: center">
                         <thead style="background-color: #0d6efd; color: white">
                         <tr>
-                            <td>
+                            <td class="info_td">
                                 일자
                             </td>
-                            <td>
+                            <td class="info_td">
                                 수위 (EL.m)
                             </td>
-                            <td>
+                            <td class="info_td">
                                 저수량 (천 ㎥)
                             </td>
-                            <td>
+                            <td class="info_td">
                                 유입량 (㎥/s)
                             </td>
-                            <td>
+                            <td class="info_td">
                                 저수율 (%)
                             </td>
                         </tr>
@@ -305,32 +378,10 @@
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
-    // 커스텀 오버레이에 표시할 컨텐츠 입니다
-    // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-    // 별도의 이벤트 메소드를 제공하지 않습니다
-    // const content = '<div class="kakao_wrap">' +
-    //     '    <div class="kakao_info">' +
-    //     '        <div class="kakao_title">' +
-    //     '            에코피스 (주)' +
-    //     '            <div class="kakao_close" onclick="closeOverlay()" title="닫기"></div>' +
-    //     '        </div>' +
-    //     '        <div class="kakao_body">' +
-    //     '            <div class="kakao_img">' +
-    //     '                <img src="../images/ecopeace-logo-small.png" width="76" height="71">' +
-    //     '           </div>' +
-    //     '            <div class="kakao_desc">' +
-    //     '                <div class="kakao_ellipsis">광주광역시 북구 첨단벤처소로15번길 7, 1층</div>' +
-    //     '                <div class="kakao_jibun ellipsis">062-431-3351 (지번) 북구 월출동 970-31</div>' +
-    //     '                <div><a href="http://kko.to/jakMybsgF" target="_blank" class="kakao_link">자세히 보기</a></div>' +
-    //     '            </div>' +
-    //     '        </div>' +
-    //     '    </div>' +
-    //     '</div>';
 
     // 마커 위에 커스텀오버레이를 표시합니다
     // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
     const overlay = new kakao.maps.CustomOverlay({
-        content: content,
         map: map,
         position: marker.getPosition()
     });

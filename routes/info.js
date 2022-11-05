@@ -53,7 +53,6 @@ router.get('/search', function(req, res) {
             const data = this.responseText; // text 형태로 변환
             let parser = new DOMParser();
             let xmlDoc = parser.parseFromString(data, "text/xml");
-            // let count =  xmlDoc.getElementsByTagName("totalCount")[0].textContent;// javaScript 의 자동 형변환 이용 => 문자열에 숫자 곱하면 숫자됨
             let list = [];
             for ( let i = 0 ; i < 10 ; i ++ ) {
                 let one_list = []
