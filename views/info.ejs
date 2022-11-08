@@ -5,9 +5,11 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark GOTHIC_M" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark GOTHIC_M"
+       id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+           aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="/">
             <img src="img/observation-icon.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 text-white">평림댐 관측 프로그램</span>
@@ -118,10 +120,10 @@
                             <th class="text-black-50">체적 (천m<sup>3</sup>)</th>
                         </tr>
                         <tr>
-                            <td>      37.3</td>
-                            <td>     390.5</td>
-                            <td>     116.0</td>
-                            <td>     892.8</td>
+                            <td> 37.3</td>
+                            <td> 390.5</td>
+                            <td> 116.0</td>
+                            <td> 892.8</td>
                         </tr>
                         <tr>
                             <th rowspan="2" class="text-black-50">유역</th>
@@ -129,8 +131,8 @@
                             <th colspan="2" class="text-black-50">연간용수공급용량 (백만m<sup>3</sup>)</th>
                         </tr>
                         <tr>
-                            <td colspan="2">      19.9</td>
-                            <td colspan="2">      11.8</td>
+                            <td colspan="2"> 19.9</td>
+                            <td colspan="2"> 11.8</td>
                         </tr>
                         <tr>
                             <th rowspan="10" class="text-black-50">저수지</th>
@@ -138,40 +140,40 @@
                             <th colspan="2" class="text-black-50">계획홍수위 (EL.m)</th>
                         </tr>
                         <tr>
-                            <td colspan="2">       0.9</td>
-                            <td colspan="2">     111.30</td>
+                            <td colspan="2"> 0.9</td>
+                            <td colspan="2"> 111.30</td>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-black-50">상시만수위 (EL.m)</th>
                             <th colspan="2" class="text-black-50">홍수기제한수위 (EL.m)</th>
                         </tr>
                         <tr>
-                            <td colspan="2">     109.70</td>
-                            <td colspan="2">     109.70</td>
+                            <td colspan="2"> 109.70</td>
+                            <td colspan="2"> 109.70</td>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-black-50">월류정표고 (EL.m)</th>
                             <th colspan="2" class="text-black-50">저수위 (EL.m)</th>
                         </tr>
                         <tr>
-                            <td colspan="2">     109.70</td>
-                            <td colspan="2">      91.60</td>
+                            <td colspan="2"> 109.70</td>
+                            <td colspan="2"> 91.60</td>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-black-50">총 저수용량 (백만m<sup>3</sup>)</th>
                             <th colspan="2" class="text-black-50">유효 저수량 (백만m<sup>3</sup>)</th>
                         </tr>
                         <tr>
-                            <td colspan="2">      10.3</td>
-                            <td colspan="2">       8.1</td>
+                            <td colspan="2"> 10.3</td>
+                            <td colspan="2"> 8.1</td>
                         </tr>
                         <tr>
                             <th colspan="2" class="text-black-50">홍수 조절용량 (백만m<sup>3</sup>)</th>
                             <th colspan="2" class="text-black-50">사업기간</th>
                         </tr>
                         <tr>
-                            <td colspan="2">       0.0</td>
-                            <td colspan="2"> ~ </td>
+                            <td colspan="2"> 0.0</td>
+                            <td colspan="2"> ~</td>
                         </tr>
                         </thead>
                     </table>
@@ -186,7 +188,8 @@
                         평림댐 일일 데이터
                     </h3>
                     <p class="mb-0">일일자료는 용수관리(가뭄 등)에 활용할 수 있으며 최대 1년까지 조회 가능합니다.</p>
-                    <p class="mb-0"><b style="color: #f34a44">모든 자료는 자정 기준으로 조회하며 파랑 등의 순간적인 수위변동에 따라 실제상황과 상이할 수 있습니다.</b></p>
+                    <p class="mb-0"><b style="color: #f34a44">모든 자료는 자정 기준으로 조회하며 파랑 등의 순간적인 수위변동에 따라 실제상황과 상이할 수
+                            있습니다.</b></p>
 
                     <table class="table" style="text-align: center">
                         <thead style="background-color: #0d6efd; color: white">
@@ -263,82 +266,82 @@
     async function getList(value) {
 
         // 페이지네이션
-        let total_page = Math.ceil( 365 / 10) ; // 모든 페이지의 수 (모든 데이터 = 365 / 한페이지에 나타낼 데이터 = 10)
-        let page_group = Math.ceil( value / 10 ); // 화면에 보여질 페이지 그룹 (현재 보고 있는 페이지 = value / 한 화면에 나타낼 페이지 수 = 10)
+        let total_page = Math.ceil(365 / 10); // 모든 페이지의 수 (모든 데이터 = 365 / 한페이지에 나타낼 데이터 = 10)
+        let page_group = Math.ceil(value / 10); // 화면에 보여질 페이지 그룹 (현재 보고 있는 페이지 = value / 한 화면에 나타낼 페이지 수 = 10)
 
         let last = page_group * 10; // 마지막 페이지네이션 번호 (페이지 그룹 * 한 화면에 나타낼 페이지 수 = 10), 단 계산된 값이 모든 페이지 수보다 많으면 마지막 페이지네이션 번호는 모든 페이지의 수.
         if (last > total_page) last = total_page;
-        let first = last - ( 10 - 1 ) <= 0 ? 1 : last - (10 - 1) ; // 첫 페이지네이션 번호 (마지막 페이지네이션 번호 - (한 화면에 나타낼 페이지 - 1)), 단 계산된 값이 0보다 아래면 첫번째 페이지네이션 번호는 1.
+        let first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1); // 첫 페이지네이션 번호 (마지막 페이지네이션 번호 - (한 화면에 나타낼 페이지 - 1)), 단 계산된 값이 0보다 아래면 첫번째 페이지네이션 번호는 1.
 
         let next = last + 1; // 다음 그룹을 눌렀을 때 나타나야할 번호
         let prev = first - 1; // 이전 그룹을 눌렀을 때 나타나야할 번호
 
-            await $.ajax({
-                url : '/info/search',
-                type : 'GET',
-                data : {
-                    index : value
-                },
-                dataType : "json",
-                timeout : 10000,
-                contentType : "application/json",
-                success : function (data) {
+        await $.ajax({
+            url: '/info/search',
+            type: 'GET',
+            data: {
+                index: value
+            },
+            dataType: "json",
+            timeout: 10000,
+            contentType: "application/json",
+            success: function (data) {
 
-                    // 데이터 그리기
-                    const contents = $('#contents');
-                    contents.empty();
-                    for(let i = 0 ; i < 10; i ++){
-                        contents.append('<tr>' +
-                            '<td>' + (data.data[i][0]).slice(0,4) + '년' +  (data.data[i][0]).slice(4,-2) + '월' + (data.data[i][0]).slice(-2) + '일</td>' +
-                            '<td>' + data.data[i][1] + '</td>' +
-                            '<td>' + Math.ceil(data.data[i][2]) + '</td>' +
-                            '<td>' + data.data[i][3] + '</td>' +
-                            '<td>' + data.data[i][4] + '</td>' +
-                            '</tr>');
-                    }
-
-                    // 페이지네이션 그리기
-                    const pagination = $('#pagination');
-                    pagination.empty();
-                    if (value > 10) {
-                        pagination.append('<li class="page-item">' +
-                            '<a class="page-link" aria-label="Previous" id="prev">' +
-                            '<span aria-hidden="true">&laquo;</span>' +
-                            '</a>' +
-                            '</li>');
-                    }
-                    for (let i = first; i <= last ; i ++ ){
-                        if ( i == value){
-                            pagination.append('<li class="page-item active"><a class="page-link" id="'+ i +'" onclick="getList('+ i +')">'+ i +'</a></li>');
-                        } else {
-                            pagination.append('<li class="page-item"><a class="page-link" id="'+ i +'" onclick="getList('+ i +')">'+ i +'</a></li>');
-                        }
-                    }
-                    if (value < 31) {
-                        pagination.append('<li class="page-item">' +
-                            '<a class="page-link" aria-label="Next" id="next">' +
-                            '<span aria-hidden="true">&raquo;</span>' +
-                            '</a>' +
-                            '</li>');
-                    }
-
-                    $('.page-link').click(function (e){
-                        e.preventDefault();
-                        let $item = $(this).attr('id');
-                        if ($item == "next"){
-                            getList(next);
-                        } else if ($item == "prev"){
-                            getList(prev);
-                        }
-                    })
-                },
-                error : function (error) {
-                    console.log(error);
+                // 데이터 그리기
+                const contents = $('#contents');
+                contents.empty();
+                for (let i = 0; i < 10; i++) {
+                    contents.append('<tr>' +
+                        '<td>' + (data.data[i][0]).slice(0, 4) + '년' + (data.data[i][0]).slice(4, -2) + '월' + (data.data[i][0]).slice(-2) + '일</td>' +
+                        '<td>' + data.data[i][1] + '</td>' +
+                        '<td>' + Math.ceil(data.data[i][2]) + '</td>' +
+                        '<td>' + data.data[i][3] + '</td>' +
+                        '<td>' + data.data[i][4] + '</td>' +
+                        '</tr>');
                 }
-            })
+
+                // 페이지네이션 그리기
+                const pagination = $('#pagination');
+                pagination.empty();
+                if (value > 10) {
+                    pagination.append('<li class="page-item">' +
+                        '<a class="page-link" aria-label="Previous" id="prev">' +
+                        '<span aria-hidden="true">&laquo;</span>' +
+                        '</a>' +
+                        '</li>');
+                }
+                for (let i = first; i <= last; i++) {
+                    if (i == value) {
+                        pagination.append('<li class="page-item active"><a class="page-link" id="' + i + '" onclick="getList(' + i + ')">' + i + '</a></li>');
+                    } else {
+                        pagination.append('<li class="page-item"><a class="page-link" id="' + i + '" onclick="getList(' + i + ')">' + i + '</a></li>');
+                    }
+                }
+                if (value < 31) {
+                    pagination.append('<li class="page-item">' +
+                        '<a class="page-link" aria-label="Next" id="next">' +
+                        '<span aria-hidden="true">&raquo;</span>' +
+                        '</a>' +
+                        '</li>');
+                }
+
+                $('.page-link').click(function (e) {
+                    e.preventDefault();
+                    let $item = $(this).attr('id');
+                    if ($item == "next") {
+                        getList(next);
+                    } else if ($item == "prev") {
+                        getList(prev);
+                    }
+                })
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
     }
 
-    $(document).ready(function (){
+    $(document).ready(function () {
         const value = 1;
         getList(value);
     })

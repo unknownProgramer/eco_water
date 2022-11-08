@@ -7,17 +7,17 @@ let rsqData = data[6][2] - data[0][2];
 let lwlUpDown, rsqUpDown, lwltext, rsqtext, count_date;
 let date_list = [];
 let rand_list = [];
-for (let i = 1 ; i < 8 ; i ++ ){
-    let rand_int = (Math.floor(Math.random() * 10) + i) + (i*10);
+for (let i = 1; i < 8; i++) {
+    let rand_int = (Math.floor(Math.random() * 10) + i) + (i * 10);
     rand_list.push(rand_int);
 }
 
-for(let i = 1 ; i < 8 ; i ++) {
-  count_date = parseInt((('0' + date.getDate())).slice(-2))+i;
-  if (( '0' + date.getDate()) == '01') {
-      count_date = '01';
-  }
-  date_list.push(count_date);
+for (let i = 1; i < 8; i++) {
+    count_date = parseInt((('0' + date.getDate())).slice(-2)) + i;
+    if (('0' + date.getDate()) == '01') {
+        count_date = '01';
+    }
+    date_list.push(count_date);
 }
 
 if (lwlData > 0) {
@@ -42,9 +42,11 @@ if (rsqData > 0) {
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark GOTHIC_M" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark GOTHIC_M"
+       id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+           aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="/">
             <img src="img/observation-icon.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 text-white">평림댐 관측 프로그램</span>
@@ -142,8 +144,8 @@ if (rsqData > 0) {
                     </div>
                     <hr class="mb-1">
                 </div>
-
                 <!-- 3D 렌더링 캔버스 끝-->
+
                 <!--        <div class="progress">-->
                 <!--          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style=" " aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">-->
                 <!--            여기엔-->
@@ -187,7 +189,8 @@ if (rsqData > 0) {
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0">현재 수량</p>
-                                <h4 class="mb-0 GULIM">약 <b style="color: #0d6efd"><%= (data[6][2]).toLocaleString() %></b> ㎥
+                                <h4 class="mb-0 GULIM">약 <b
+                                            style="color: #0d6efd"><%= (data[6][2]).toLocaleString() %></b> ㎥
                                 </h4>
                                 <p class="text-sm mb-0 text-black-50">(자정 기준)</p>
                             </div>
@@ -227,7 +230,7 @@ if (rsqData > 0) {
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                              <p class="mb-0 text-sm"><%= lwltext %> </p>
+                                <p class="mb-0 text-sm"><%= lwltext %> </p>
                             </div>
                         </div>
                     </div>
@@ -244,16 +247,16 @@ if (rsqData > 0) {
                                 </div>
                             </div>
                         </div>
-                      <div class="card-body">
-                        <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 지난
-                          1주일간 <b style="color: #4caf50">수량변화</b></h6>
-                        <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
-                        <hr class="dark horizontal">
-                        <div class="d-flex ">
-                          <i class="material-icons text-sm my-auto me-1">schedule</i>
-                          <p class="mb-0 text-sm"><%= rsqtext %> </p>
+                        <div class="card-body">
+                            <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 지난
+                                1주일간 <b style="color: #4caf50">수량변화</b></h6>
+                            <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm"><%= rsqtext %> </p>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
                 <!-- 1주일간 수량 graph 끝-->
@@ -268,22 +271,22 @@ if (rsqData > 0) {
                                 </div>
                             </div>
                         </div>
-                      <div class="card-body">
-                        <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 향후
-                          1주일간 <b style="color: #0d6efd">수량예측 결과</b></h6>
-                        <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
-                        <hr class="dark horizontal">
-                        <div class="d-flex ">
-                          <i class="material-icons text-sm my-auto me-1">schedule</i>
-                          <p class="mb-0 text-sm">예측오차 : ±5%</p>
+                        <div class="card-body">
+                            <h6 class="text-lg mb-0 GOTHIC_M"><%= today.slice(4, -2) %>월 <%= today.slice(-2) %>일 기준 향후
+                                1주일간 <b style="color: #0d6efd">수량예측 결과</b></h6>
+                            <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm">예측오차 : ±5%</p>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
                 <!-- 1주일간 수량 예측 결과값 graph 끝-->
 
             </div>
-            <!-- 수위, 수량및 예측결과 graph container 시작 -->
+            <!-- 수위, 수량및 예측결과 graph container 끝 -->
 
         </div>
         <!-- 전체 보드 끝 -->
@@ -405,7 +408,7 @@ if (rsqData > 0) {
     new Chart(ctx2, {
         type: "line",
         data: {
-          labels: [<%= (data[0][0]).slice(-2) %>+'일', <%= (data[1][0]).slice(-2) %>+'일', <%= (data[2][0]).slice(-2) %>+'일', <%= (data[3][0]).slice(-2) %>+'일', <%= (data[4][0]).slice(-2) %>+'일', <%= (data[5][0]).slice(-2) %>+'일', <%= (data[6][0]).slice(-2) %>+'일'],
+            labels: [<%= (data[0][0]).slice(-2) %>+'일', <%= (data[1][0]).slice(-2) %>+'일', <%= (data[2][0]).slice(-2) %>+'일', <%= (data[3][0]).slice(-2) %>+'일', <%= (data[4][0]).slice(-2) %>+'일', <%= (data[5][0]).slice(-2) %>+'일', <%= (data[6][0]).slice(-2) %>+'일'],
             datasets: [{
                 label: "수량(천 ㎥) ",
                 tension: 0,
@@ -418,7 +421,7 @@ if (rsqData > 0) {
                 borderWidth: 4,
                 backgroundColor: "transparent",
                 fill: true,
-                data: [<%= (data[0][2])/1000 %>, <%= (data[1][2])/1000 %>, <%= (data[2][2])/1000 %>, <%= (data[3][2])/1000 %>, <%= (data[4][2])/1000 %>, <%= (data[5][2])/1000 %>, <%= (data[6][2])/1000 %>],
+                data: [<%= (data[0][2]) / 1000 %>, <%= (data[1][2]) / 1000 %>, <%= (data[2][2]) / 1000 %>, <%= (data[3][2]) / 1000 %>, <%= (data[4][2]) / 1000 %>, <%= (data[5][2]) / 1000 %>, <%= (data[6][2]) / 1000 %>],
                 maxBarThickness: 6
 
             }],
@@ -488,7 +491,7 @@ if (rsqData > 0) {
     new Chart(ctx3, {
         type: "line",
         data: {
-          labels: [<%=date_list[0] %>+'일', <%=date_list[1] %>+'일', <%=date_list[2] %>+'일', <%=date_list[3] %>+'일', <%=date_list[4] %>+'일', <%=date_list[5] %>+'일', <%=date_list[6] %>+'일'],
+            labels: [<%= date_list[0] %>+'일', <%= date_list[1] %>+'일', <%= date_list[2] %>+'일', <%= date_list[3] %>+'일', <%= date_list[4] %>+'일', <%= date_list[5] %>+'일', <%= date_list[6] %>+'일'],
             datasets: [{
                 label: "수량(천 ㎥) ",
                 tension: 0,
@@ -500,7 +503,7 @@ if (rsqData > 0) {
                 borderWidth: 4,
                 backgroundColor: "transparent",
                 fill: true,
-                data: [<%= ((data[1][2])/1000)-rand_list[0] %>, <%= ((data[1][2])/1000)-rand_list[1] %>, <%= ((data[2][2])/1000)-rand_list[2] %>, <%= ((data[3][2])/1000)-rand_list[3] %>, <%= ((data[4][2])/1000)-rand_list[4] %>, <%= ((data[5][2])/1000)-rand_list[5] %>, <%= ((data[6][2])/1000)-rand_list[6] %>],
+                data: [<%= ((data[1][2]) / 1000) - rand_list[0] %>, <%= ((data[1][2]) / 1000) - rand_list[1] %>, <%= ((data[2][2]) / 1000) - rand_list[2] %>, <%= ((data[3][2]) / 1000) - rand_list[3] %>, <%= ((data[4][2]) / 1000) - rand_list[4] %>, <%= ((data[5][2]) / 1000) - rand_list[5] %>, <%= ((data[6][2]) / 1000) - rand_list[6] %>],
                 maxBarThickness: 6
 
             }],
@@ -584,6 +587,7 @@ if (rsqData > 0) {
           "three": "./build/three.module.js"
         }
       }
+
 
 </script>
 <script type="module">
