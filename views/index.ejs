@@ -185,7 +185,7 @@ if (rsqData > 0) {
                     <div class="card mt-5 mx-7 GOTHIC_M">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">water</i>
+                                <i class="material-icons opacity-10">opacity</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0">현재 수량</p>
@@ -324,16 +324,19 @@ if (rsqData > 0) {
     const ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
-        type: "bar",
+        type: "line",
         data: {
             labels: [<%= (data[0][0]).slice(-2) %>+'일', <%= (data[1][0]).slice(-2) %>+'일', <%= (data[2][0]).slice(-2) %>+'일', <%= (data[3][0]).slice(-2) %>+'일', <%= (data[4][0]).slice(-2) %>+'일', <%= (data[5][0]).slice(-2) %>+'일', <%= (data[6][0]).slice(-2) %>+'일'],
             datasets: [{
                 label: "수위 ",
-                tension: 10,
+                tension: 0,
                 borderWidth: 0,
-                borderRadius: 1,
-                borderSkipped: false,
-                backgroundColor: "rgba(255, 255, 255, .8)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                pointBorderColor: "transparent",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderColor: "rgba(255, 255, 255, .8)",
+                borderWidth: 4,
                 data: [<%= data[0][1] %>, <%= data[1][1] %>, <%= data[2][1] %>, <%= data[3][1] %>, <%= data[4][1] %>, <%= data[5][1] %>, <%= data[6][1] %>],
                 maxBarThickness: 8
             },],
@@ -587,6 +590,7 @@ if (rsqData > 0) {
           "three": "./build/three.module.js"
         }
       }
+
 
 
 </script>

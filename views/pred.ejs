@@ -100,9 +100,9 @@
                     <div class="mt-5">
                         <h3 class="GULIM mb-3">평림댐 수위 예측 프로그램</h3>
                         <p class="GOTHIC_M mb-0">평림댐의 수위 및 수량을 예측할수 있는 프로그램입니다.</p>
-                        <p class="GOTHIC_M">수위 (EL.m), 저수율 (%), 강우량 (mm), 유입량 (㎥/s),총방류량 (㎥/s)를 통해 학습된 결과이며, <br>
+                        <p class="GOTHIC_M">수위 (EL.m), 저수율 (%), 강우량 (mm), 유입량 (㎥/s), 총방류량 (㎥/s)을 통해 학습된 결과이며, <br>
                             선택 날짜 기준으로 한달 간격의 수위 및 수량을 예측할 수 있습니다.</p>
-                        <p class="GOTHIC_M mb-0" style="color: red;">아래 그래프를 통해 자세히 볼 수 있으며, 강우량에 따라 현장의 상황과 상이할 수 있습니다.</p>
+                        <p class="GOTHIC_M mb-0" style="color: red;">절대적인 수치가 아니며, 강우량에 따라 현장의 상황과 상이할 수 있습니다.</p>
                     </div>
                     <div class="cal-box mt-3">
                         <fieldset>
@@ -111,18 +111,14 @@
 
                                     <div class="row-md-3">
                                         <div class="col">
-                                            <span class="label GOTHIC_M">예측날짜</span>
+                                            <span class="label GOTHIC_M">예측 시작 날짜</span>
                                             <span class="input-calender-group">
                                                 <span class="input-calender">
                                                     <input type="text" id="datepicker" name="Date"
                                                            title="날짜 선택하기(예: 2020-01-01)">
                                                 </span>
                                             </span>
-                                            <a class="btn btn-click" type="submit"
-                                               style="background-color: #0d6efd; color: #ffffff; font-size: 14px; margin-top: 10px;"
-                                               onclick="test()">
-                                                예측하기
-                                            </a>
+                                            <a class="btn btn-click" style="background-color: #0d6efd; color: #ffffff; font-size: 14px; margin-top: 10px;" onclick="test()">예측하기</a>
                                         </div>
                                     </div>
 
@@ -183,7 +179,7 @@
                     <div class="card mt-5 mx-7 GOTHIC_M">
                         <div class="card-header p-3 pt-2">
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                <i class="material-icons opacity-10">water</i>
+                                <i class="material-icons opacity-10">opacity</i>
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0">현재 수량</p>
@@ -208,7 +204,7 @@
             </div>
 
                 <!-- 수위, 수량및 예측결과 graph container 시작 -->
-                <div class="row mt-10">
+                <div class="row mt-7">
 
                     <!-- 1주일간 수위 graph 시작-->
                     <div class="col-lg-4 col-md-6 mt-4 mb-4">
@@ -302,7 +298,6 @@
     }
 </script>
 
-<!-- 3D display script -->
 <script>
     let date = new Date();
     const ctx = document.getElementById("chart-bars").getContext("2d");
@@ -325,6 +320,7 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            color: 'rgba(255, 255, 255, .2)',
             plugins: {
                 legend: {
                     display: false,
@@ -413,6 +409,7 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            color: 'rgba(255, 255, 255, .2)',
             plugins: {
                 legend: {
                     display: false,
@@ -476,6 +473,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 <script>
     $(function () {
         $("#datepicker").datepicker({
@@ -492,6 +490,41 @@
 
         });
     });
+</script>
+
+<!-- pred script -->
+<script>
+    async function test() {
+        const pred_date = $('#datepicker').val();
+
+        await $.ajax({
+            url: '/pred/search',
+            type: 'GET',
+            data: {
+                date : pred_date
+            },
+            dataType: "json",
+            timeout: 10000,
+            contentType: "application/json",
+            success: function (data) {
+                const cal_date = new Date(data.that_date);
+
+                // 데이터 그리기
+                const contents = $('#contents');
+                contents.empty();
+                for (let i = 0; i < 5; i++) {
+                    contents.append('<tr>' +
+                        '<td>' + cal_date.toLocaleDateString() + '</td>' +
+                        '<td>' + (data.month_Elm[i]).toFixed(2) + '</td>' +
+                        '<td>' + Math.ceil(data.month_rsqty[i]) + '</td>' +
+                        '</tr>');
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
 </script>
 
 <!-- Github buttons -->
