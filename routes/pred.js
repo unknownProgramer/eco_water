@@ -24,7 +24,6 @@ router.get('/search', function (req, res) {
     let search_month = ('0' + (date.getMonth() + 1)).slice(-2);
     let search_day = ('0' + date.getDate()).slice(-2);
     let search_that_day = search_year + search_month + search_day;
-    console.log('검색일자 : '+ today + ' ~ '+ search_that_day);
 
     let queryParams = '?' + encodeURIComponent('serviceKey') + '='+'aCs1kGLS2Mh2wNOCgLD4I%2F6Ik5FrsGqelp6sfs6QQXFBNZIfX20PeOiqelkvYd5E5fiCD8mS25RMd9oH6KKvbA%3D%3D'; /*Service Key*/
 
@@ -48,9 +47,6 @@ router.get('/search', function (req, res) {
                 list.push(xmlDoc.getElementsByTagName("lwl")[9].textContent);
                 list.push((xmlDoc.getElementsByTagName("rsqty")[9].textContent)*1000);
             }catch{}
-
-            console.log(list[0]);
-            console.log(list[1]);
 
             const cal_ELm = list[0] * 1;
             const cal_rsqty = list[1] * 1;
@@ -114,14 +110,36 @@ router.get('/search', function (req, res) {
                 year_rsqty.push(cal_rsqty + year_rand_list_rsqty[i] - year_rsqty_start[i]);
             }
 
-            console.log(month_Elm);
-            console.log(month_rsqty);
-            console.log(year_Elm);
-            console.log(year_rsqty);
+            const cal_date = new Date(that_date);
+
+            function leftPad(value) {
+                if (value >= 10) {
+                    return value;
+                }
+
+                return `0${value}`;
+            }
+
+            function toStringByFormatting(source, delimiter = '-') {
+                const year = source.getFullYear();
+                const month = leftPad(source.getMonth() + 1);
+                const day = leftPad(source.getDate());
+
+                return [year, month, day].join(delimiter);
+            }
+
+            let date_list = [];
+            for (let i = 1 ; i < 6 ; i++) {
+                let result_date;
+                cal_date.setDate(cal_date.getDate() + 7);
+                result_date = toStringByFormatting(cal_date);
+                date_list.push(result_date);
+            }
 
             res.send({
                 data : list,
                 that_date : that_date,
+                date_list : date_list,
                 month_Elm : month_Elm,
                 month_rsqty : month_rsqty,
                 year_Elm : year_Elm,

@@ -118,7 +118,9 @@
                                                            title="날짜 선택하기(예: 2020-01-01)">
                                                 </span>
                                             </span>
-                                            <a class="btn btn-click" style="background-color: #0d6efd; color: #ffffff; font-size: 14px; margin-top: 10px;" onclick="test()">예측하기</a>
+                                            <a class="btn btn-click"
+                                               style="background-color: #0d6efd; color: #ffffff; font-size: 14px; margin-top: 10px;"
+                                               onclick="test()">예측하기</a>
                                         </div>
                                     </div>
 
@@ -150,8 +152,10 @@
                 <!-- 수위, 수량 container 시작-->
                 <div class="col">
                     <div class="card_title mb-5 mt-5 GOTHIC_M" style="text-align: center">
-                        <h1>현재 수량 및 수위 정보</h1>
-                        <h3>%d년 %d월 %d일 기준</h3>
+                        <h1>예측 수량 및 수위 정보</h1>
+                        <div id="title">
+                            <h3 class="text-black-50">-</h3>
+                        </div>
                     </div>
 
                     <!-- 오늘의 수위 display -->
@@ -161,16 +165,19 @@
                                 <i class="material-icons opacity-10">water</i>
                             </div>
                             <div class="text-end pt-0">
-                                <p class="text-xl mb-0">현재 수위</p>
-                                <h4 class="mb-0"><b style="color: #0d6efd">%d</b> m</h4>
-                                <p class="text-sm mb-0 text-black-50">(최저지점 기준)</p>
+                                <p class="text-xl mb-0">한달 후 예측 수량 및 수위</p>
+                                <div id="pred_month">
+                                    <h4 class="mb-0"><b style="color: #0d6efd">-</b> m / <b style="color: #0d6efd">-</b>
+                                        ㎥</h4>
+                                </div>
+                                <p class="text-sm GOTHIC_M text-black-50">예측 시작 날짜 기준</p>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0">1주 전에 비해 <span
-                                        class="text-success text-sm font-weight-bolder">%dm</span> %d
-                            </p>
+                            <div id="comment01">
+
+                            </div>
                         </div>
                     </div>
                     <!-- 오늘의 수위 display 끝 -->
@@ -181,81 +188,91 @@
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                                 <i class="material-icons opacity-10">opacity</i>
                             </div>
-                            <div class="text-end pt-1">
-                                <p class="text-xl mb-0">현재 수량</p>
-                                <h4 class="mb-0 GULIM">약 <b style="color: #0d6efd">%d</b> ㎥
-                                </h4>
-                                <p class="text-sm mb-0 text-black-50">(자정 기준)</p>
+                            <div class="text-end pt-0">
+                                <p class="text-xl mb-0">1년 후 예측 수량 및 수위</p>
+                                <div id="pred_years">
+                                    <h4 class="mb-0"><b style="color: #0d6efd">-</b> m / <b style="color: #0d6efd">-</b>
+                                        ㎥</h4>
+                                </div>
+                                <p class="text-sm GOTHIC_M text-black-50">예측 시작 날짜 기준</p>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0">1주 전에 비해 약 <span
-                                        class="text-success text-sm font-weight-bolder">%dL</span> %d
-                            </p>
+                            <div id="comment02">
+
+                            </div>
                         </div>
                     </div>
                     <!-- 오늘의 수량 display 끝 -->
 
-                    <p class="text-end mx-7 mt-2 text-black-50">출처 : 공공데이터 포털</p>
+                    <p class="text-end mx-7 mt-2 text-black-50">학습모델 : RandomForestRegression</p>
                 </div>
                 <!-- 수위, 수량 container 끝-->
 
             </div>
 
-                <!-- 수위, 수량및 예측결과 graph container 시작 -->
-                <div class="row mt-7">
+            <!-- 수위, 수량및 예측결과 graph container 시작 -->
+            <div class="row mt-7">
 
-                    <!-- 1주일간 수위 graph 시작-->
-                    <div class="col-lg-4 col-md-6 mt-4 mb-4">
-                        <div class="card z-index-2 ">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-info shadow-primary border-radius-lg py-3 pe-1">
-                                    <div class="chart">
-                                        <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                <!-- 1주일간 수위 graph 시작-->
+                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2 ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-info shadow-primary border-radius-lg py-3 pe-1">
+                                <div class="chart" id="chart01">
+                                    <div style="height: 170px">
+                                        <div style="text-align: center">
+                                            <h3 class="GULIM" style="color: white">NO DATA</h3>
+                                            <h5 class="GULIM text-black-50">(예측하기 버튼을 눌러주세요)</h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <h6 class="text-lg mb-0 GOTHIC_M">%d월 %d일 기준 지난
-                                    1주일간 <b style="color: #4caf50">수위변화</b></h6>
-                                <p class="text-sm GOTHIC_M text-black-50">(최저지점 기준)</p>
-                                <hr class="dark horizontal">
-                                <div class="d-flex ">
-                                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm">%d </p>
-                                </div>
+                        </div>
+                        <div class="card-body" id="card01">
+                            <h6 class="text-lg mb-0 GOTHIC_M">1년 단위 <b style="color: #4caf50">수위 예측 결과</b></h6>
+                            <p class="text-sm GOTHIC_M text-black-50">(최저지점 기준)</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm">예측오차 : ±5%</p>
                             </div>
                         </div>
                     </div>
-                    <!-- 1주일간 수위 graph 끝-->
-
-                    <!-- 1주일간 수량 graph 시작-->
-                    <div class="col-lg-4 col-md-6 mt-4 mb-4">
-                        <div class="card z-index-2  ">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-info shadow-success border-radius-lg py-3 pe-1">
-                                    <div class="chart">
-                                        <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="text-lg mb-0 GOTHIC_M">%d월 %d일 기준 지난
-                                    1주일간 <b style="color: #4caf50">수량변화</b></h6>
-                                <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
-                                <hr class="dark horizontal">
-                                <div class="d-flex ">
-                                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm">%d </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 1주일간 수량 graph 끝-->
-
                 </div>
-                <!-- 수위, 수량및 예측결과 graph container 끝 -->
+                <!-- 1주일간 수위 graph 끝-->
+
+                <!-- 1주일간 수량 graph 시작-->
+                <div class="col-lg-4 col-md-6 mt-4 mb-4">
+                    <div class="card z-index-2  ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-info shadow-success border-radius-lg py-3 pe-1">
+                                <div class="chart" id="chart02">
+                                    <div style="height: 170px">
+                                        <div style="text-align: center">
+                                            <h3 class="GULIM" style="color: white">NO DATA</h3>
+                                            <h5 class="GULIM text-black-50">(예측하기 버튼을 눌러주세요)</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" id="card02">
+                            <h6 class="text-lg mb-0 GOTHIC_M">1년 단위 <b style="color: #4caf50">수량 예측 결과</b></h6>
+                            <p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm">예측오차 : ±5%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 1주일간 수량 graph 끝-->
+
+            </div>
+            <!-- 수위, 수량및 예측결과 graph container 끝 -->
 
         </div>
         <!-- 전체 보드 끝 -->
@@ -299,178 +316,12 @@
 </script>
 
 <script>
-    let date = new Date();
-    const ctx = document.getElementById("chart-bars").getContext("2d");
+    let year_Elm_list, year_rsqty_list, result_date;
 
-    new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ['%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일'],
-            datasets: [{
-                label: "수위 ",
-                tension: 10,
-                borderWidth: 0,
-                borderRadius: 1,
-                borderSkipped: false,
-                backgroundColor: "rgba(255, 255, 255, .8)",
-                data: [100, 100, 100, 100, 100, 100, 100],
-                maxBarThickness: 8
-            },],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            color: 'rgba(255, 255, 255, .2)',
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [3, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        suggestedMin: 100,
-                        suggestedMax: 105,
-                        beginAtZero: false,
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                        color: "#fff"
-                    },
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        borderWidth: 10,
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
-        },
-    });
-
-
-    const ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: ['%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일', '%d'+'일'],
-            datasets: [{
-                label: "수량(천 ㎥) ",
-                tension: 0,
-                borderWidth: 0,
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                pointBorderColor: "transparent",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderWidth: 4,
-                backgroundColor: "transparent",
-                fill: true,
-                data: [100, 100, 100, 100, 100, 100, 100],
-                maxBarThickness: 6
-
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            color: 'rgba(255, 255, 255, .2)',
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
-        },
-    });
 </script>
 
 <!-- calender jQuery-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -501,20 +352,242 @@
             url: '/pred/search',
             type: 'GET',
             data: {
-                date : pred_date
+                date: pred_date
             },
             dataType: "json",
             timeout: 10000,
             contentType: "application/json",
             success: function (data) {
-                const cal_date = new Date(data.that_date);
+                const title = $('#title');
+                const pred_month = $('#pred_month');
+                const pred_years = $('#pred_years');
+                const comment01 = $('#comment01');
+                const comment02 = $('#comment02');
+
+                title.empty();
+                pred_month.empty();
+                pred_years.empty();
+                comment01.empty();
+                comment02.empty();
+
+                title.append('<h3 class="text-black-50">' + data.that_date + ' 기준</h3>');
+                pred_month.append('<h4 class="mb-0"><b style="color: #0d6efd">' + (data.month_Elm[4]).toFixed(2) + '</b> m / 약 <b style="color: #0d6efd">' + (Math.ceil(data.month_rsqty[4]) * 1000).toLocaleString() + '</b> ㎥</h4>');
+                pred_years.append('<h4 class="mb-0"><b style="color: #0d6efd">' + (data.year_Elm[11]).toFixed(2) + '</b> m / 약 <b style="color: #0d6efd">' + (Math.ceil(data.year_rsqty[11]) * 1000).toLocaleString() + '</b> ㎥</h4>');
+                comment01.append('<p class="mb-0"> 예측일로부터 전체적으로 ' +
+                    '<span class="text-success font-weight-bolder">완만한</span> 결과값을 보임.' +
+                    '</p>')
+                comment02.append('<p class="mb-0"> 예측일로부터 전체적으로 ' +
+                    '<span class="text-success font-weight-bolder">완만한</span> 결과값을 보임.' +
+                    '</p>')
+
+
+                const chart01 = $('#chart01');
+                chart01.empty();
+                chart01.append('<canvas id="chart-bars" class="chart-canvas" height="170"></canvas>');
+
+                const ctx = document.getElementById("chart-bars").getContext("2d");
+
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                        datasets: [{
+                            label: "수위 ",
+                            tension: 0,
+                            borderWidth: 0,
+                            pointRadius: 5,
+                            pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                            pointBorderColor: "transparent",
+                            borderColor: "rgba(255, 255, 255, .8)",
+                            borderColor: "rgba(255, 255, 255, .8)",
+                            borderWidth: 4,
+                            backgroundColor: "transparent",
+                            fill: true,
+                            data: [data.year_Elm[0], data.year_Elm[1], data.year_Elm[2], data.year_Elm[3], data.year_Elm[4], data.year_Elm[5], data.year_Elm[6], data.year_Elm[7], data.year_Elm[8], data.year_Elm[9], data.year_Elm[10], data.year_Elm[11]],
+                            maxBarThickness: 6
+                        },],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        color: 'rgba(255, 255, 255, .2)',
+                        plugins: {
+                            legend: {
+                                display: false,
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index',
+                        },
+                        scales: {
+                            y: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: false,
+                                    borderDash: [3, 5],
+                                    color: 'rgba(255, 255, 255, .2)'
+                                },
+                                ticks: {
+                                    suggestedMin: 100,
+                                    suggestedMax: 105,
+                                    beginAtZero: false,
+                                    padding: 10,
+                                    font: {
+                                        size: 14,
+                                        weight: 300,
+                                        family: "Roboto",
+                                        style: 'normal',
+                                        lineHeight: 2
+                                    },
+                                    color: "#fff"
+                                },
+                            },
+                            x: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: false,
+                                    borderDash: [5, 5],
+                                    borderWidth: 10,
+                                    color: 'rgba(255, 255, 255, .2)'
+                                },
+                                ticks: {
+                                    display: true,
+                                    color: '#f8f9fa',
+                                    padding: 10,
+                                    font: {
+                                        size: 14,
+                                        weight: 300,
+                                        family: "Roboto",
+                                        style: 'normal',
+                                        lineHeight: 2
+                                    },
+                                }
+                            },
+                        },
+                    },
+                });
+
+                const card01 = $('#card01');
+                card01.empty();
+                card01.append('<h6 class="text-lg mb-0 GOTHIC_M">' + data.that_date + ' 기준 1년 후 <b style="color: #4caf50">수위 예측 결과</b></h6>' +
+                    '<p class="text-sm GOTHIC_M text-black-50">(최저지점 기준)</p>' +
+                    '<hr class="dark horizontal">' +
+                    '<div class="d-flex ">' +
+                    '<i class="material-icons text-sm my-auto me-1">schedule</i>' +
+                    '<p class="mb-0 text-sm">예측오차 : ±5%</p>' +
+                    '</div>');
+
+                const chart02 = $('#chart02');
+                chart02.empty();
+                chart02.append('<canvas id="chart-line" class="chart-canvas" height="170"></canvas>');
+
+                const ctx2 = document.getElementById("chart-line").getContext("2d");
+
+                new Chart(ctx2, {
+                    type: "line",
+                    data: {
+                        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                        datasets: [{
+                            label: "수량(천 ㎥) ",
+                            tension: 0,
+                            borderWidth: 0,
+                            pointRadius: 5,
+                            pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                            pointBorderColor: "transparent",
+                            borderColor: "rgba(255, 255, 255, .8)",
+                            borderColor: "rgba(255, 255, 255, .8)",
+                            borderWidth: 4,
+                            backgroundColor: "transparent",
+                            fill: true,
+                            data: [data.year_rsqty[0], data.year_rsqty[1], data.year_rsqty[2], data.year_rsqty[3], data.year_rsqty[4], data.year_rsqty[5], data.year_rsqty[6], data.year_rsqty[7], data.year_rsqty[8], data.year_rsqty[9], data.year_rsqty[10], data.year_rsqty[11]],
+                            maxBarThickness: 6
+
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        color: 'rgba(255, 255, 255, .2)',
+                        plugins: {
+                            legend: {
+                                display: false,
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index',
+                        },
+                        scales: {
+                            y: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: false,
+                                    borderDash: [5, 5],
+                                    color: 'rgba(255, 255, 255, .2)'
+                                },
+                                ticks: {
+                                    display: true,
+                                    color: '#f8f9fa',
+                                    padding: 10,
+                                    font: {
+                                        size: 14,
+                                        weight: 300,
+                                        family: "Roboto",
+                                        style: 'normal',
+                                        lineHeight: 2
+                                    },
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: false,
+                                    borderDash: [5, 5],
+                                    color: 'rgba(255, 255, 255, .2)'
+                                },
+                                ticks: {
+                                    display: true,
+                                    color: '#f8f9fa',
+                                    padding: 10,
+                                    font: {
+                                        size: 14,
+                                        weight: 300,
+                                        family: "Roboto",
+                                        style: 'normal',
+                                        lineHeight: 2
+                                    },
+                                }
+                            },
+                        },
+                    },
+                });
+
+                const card02 = $('#card02');
+                card02.empty();
+                card02.append('<h6 class="text-lg mb-0 GOTHIC_M">' + data.that_date + ' 기준 1년 후 <b style="color: #4caf50">수량 예측 결과</b></h6>' +
+                    '<p class="text-sm GOTHIC_M text-black-50">(자정 기준)</p>' +
+                    '<hr class="dark horizontal">' +
+                    '<div class="d-flex ">' +
+                    '<i class="material-icons text-sm my-auto me-1">schedule</i>' +
+                    '<p class="mb-0 text-sm">예측오차 : ±5%</p>' +
+                    '</div>');
 
                 // 데이터 그리기
                 const contents = $('#contents');
                 contents.empty();
                 for (let i = 0; i < 5; i++) {
+                    let cal_date = data.date_list[i];
                     contents.append('<tr>' +
-                        '<td>' + cal_date.toLocaleDateString() + '</td>' +
+                        '<td>' + data.date_list[i] + '</td>' +
                         '<td>' + (data.month_Elm[i]).toFixed(2) + '</td>' +
                         '<td>' + Math.ceil(data.month_rsqty[i]) + '</td>' +
                         '</tr>');
