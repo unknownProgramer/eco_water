@@ -45,11 +45,11 @@ async function pred_operation() {
                 title.append('<h3 class="text-black-50">' + data.that_date + ' 기준</h3>');
                 pred_month.append('<h4 class="mb-0"><b style="color: #0d6efd">' + (data.month_Elm[4]).toFixed(2) + '</b> m / 약 <b style="color: #0d6efd">' + (Math.ceil(data.month_rsqty[4]) * 1000).toLocaleString() + '</b> ㎥</h4>');
                 pred_years.append('<h4 class="mb-0"><b style="color: #0d6efd">' + (data.year_Elm[11]).toFixed(2) + '</b> m / 약 <b style="color: #0d6efd">' + (Math.ceil(data.year_rsqty[11]) * 1000).toLocaleString() + '</b> ㎥</h4>');
-                comment01.append('<p class="mb-0"> 예측일로부터 전체적으로 ' +
-                    '<span class="text-success font-weight-bolder">완만한</span> 결과값을 보임.' +
+                comment01.append('<p class="mb-0"> 현재 수량 및 수위 : ' +
+                    '<span class="text-success font-weight-bolder">'+ data.cal_ELm +'</span> m / <span class="text-success font-weight-bolder">'+ (Math.ceil(data.cal_rsqty) * 1000).toLocaleString() +'</span> ㎥' +
                     '</p>')
-                comment02.append('<p class="mb-0"> 예측일로부터 전체적으로 ' +
-                    '<span class="text-success font-weight-bolder">완만한</span> 결과값을 보임.' +
+                comment02.append('<p class="mb-0"> 현재 수량 및 수위 : ' +
+                    '<span class="text-success font-weight-bolder">'+ data.cal_ELm +'</span> m / <span class="text-success font-weight-bolder">'+ (Math.ceil(data.cal_rsqty) * 1000).toLocaleString() +'</span> ㎥' +
                     '</p>')
 
                 const chart01 = $('#chart01');
@@ -61,7 +61,7 @@ async function pred_operation() {
                 new Chart(ctx, {
                     type: "line",
                     data: {
-                        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                        labels: [data.month_list[0], data.month_list[1], data.month_list[2], data.month_list[3], data.month_list[4], data.month_list[5], data.month_list[6], data.month_list[7], data.month_list[8], data.month_list[9], data.month_list[10], data.month_list[11]],
                         datasets: [{
                             label: "수위 ",
                             tension: 0,
@@ -162,7 +162,7 @@ async function pred_operation() {
                 new Chart(ctx2, {
                     type: "line",
                     data: {
-                        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                        labels: [data.month_list[0], data.month_list[1], data.month_list[2], data.month_list[3], data.month_list[4], data.month_list[5], data.month_list[6], data.month_list[7], data.month_list[8], data.month_list[9], data.month_list[10], data.month_list[11]],
                         datasets: [{
                             label: "수량(천 ㎥) ",
                             tension: 0,

@@ -52,6 +52,8 @@ router.get('/search', function (req, res) {
 
             const cal_ELm = list[0] * 1;
             const cal_rsqty = list[1] * 1;
+            const set_cal_ELm = list[0] * 1;
+            const set_cal_rsqty = list[1] * 1;
 
             const month_Elm = [];
             const month_rsqty = [];
@@ -113,6 +115,7 @@ router.get('/search', function (req, res) {
             }
 
             const cal_date = new Date(that_date);
+            const first_cal_date = new Date(that_date);
 
             function leftPad(value) {
                 if (value >= 10) {
@@ -138,14 +141,33 @@ router.get('/search', function (req, res) {
                 date_list.push(result_date);
             }
 
+            const month_list = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+            let set_month_list = [];
+            let set_year_Elm = [];
+            let set_year_rsqty = [];
+            let start_month = (first_cal_date.getMonth()) + 1;
+
+            for (let i = 0 ; i < 12 ; i ++){
+                if (start_month > 11) {
+                    start_month = 0;
+                }
+                set_month_list.push(month_list[start_month]);
+                set_year_Elm.push(year_Elm[start_month]);
+                set_year_rsqty.push(year_rsqty[start_month]);
+                start_month += 1 ;
+            }
+
             res.send({
                 data : list,
+                cal_ELm : set_cal_ELm,
+                cal_rsqty : set_cal_rsqty,
                 that_date : that_date,
                 date_list : date_list,
                 month_Elm : month_Elm,
                 month_rsqty : month_rsqty,
-                year_Elm : year_Elm,
-                year_rsqty : year_rsqty
+                year_Elm : set_year_Elm,
+                year_rsqty : set_year_rsqty,
+                month_list : set_month_list
             });
         }
     };

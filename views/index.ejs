@@ -689,39 +689,22 @@ if (rsqData > 0) {
         //////////////////////
         //     RENDERER     //
         //////////////////////
-        // const renderer = new THREE.WebGLRenderer({canvas});
         const canvas = document.querySelector('#lender_canvas');
         renderer = new THREE.WebGLRenderer({canvas});
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
-        // document.body.appendChild( renderer.domElement );
-        // const renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true});
-
-        // renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setSize(840, 480);
-        // document.body.appendChild(renderer.domElement);
 
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFShadowMap;
-
-        /////////////////
-        //     GUI     //
-        /////////////////
-        // const gui = new GUI();
-        // gui.addColor( params, '담수 색상' ).onChange( function ( value ) {
-        //   water.material.uniforms[ 'color' ].value.set( value );
-        // } );
-        // gui.add( params, '담수 높이', 25, 50, 0.5 ).onChange( function ( value ) {
-        //   water.position.y = value;
-        // });
-        // gui.open();
 
         //////////////////////
         //     CONTROLS     //
         //////////////////////
         const controls = new OrbitControls(camera, renderer.domElement);
-        controls.minDistance = 50;
-        controls.maxDistance = 500;
+        controls.minDistance = 125;
+        controls.maxDistance = 350;
+        controls.maxPolarAngle = 1;
         window.addEventListener('resize', onWindowResize);
     }
 
