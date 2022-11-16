@@ -30,7 +30,7 @@ router.get('/search', function(req, res) {
     // 검색 시작 일자
     date.setDate(date.getDate() - 10);
     let search_year = date.getFullYear();
-    let search_month = ('0' + (date.getMonth() + 1)).slice(-2); // 검색 시작일자에 +1을 하여 계산한 이유는, 현재 날짜를 검색 종료 일자로 입력했을 때, 현재 날짜는 데이터를 불러올 수 없기때문(API 상의 문제)
+    let search_month = ('0' + (date.getMonth() + 1)).slice(-2);
     let search_day = ('0' + date.getDate()).slice(-2);
     let search_that_day = search_year + search_month + search_day; // yyyy.mm.dd
     console.log('검색일자 : '+ today + ' ~ '+ search_that_day);

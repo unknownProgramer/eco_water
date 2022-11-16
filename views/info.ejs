@@ -261,10 +261,10 @@
     }
 </script>
 
+<!-- pred_program script -->
 <script>
     // 데이터 검색
     async function getList(value) {
-
         // 페이지네이션
         let total_page = Math.ceil(365 / 10); // 모든 페이지의 수 (모든 데이터 = 365 / 한페이지에 나타낼 데이터 = 10)
         let page_group = Math.ceil(value / 10); // 화면에 보여질 페이지 그룹 (현재 보고 있는 페이지 = value / 한 화면에 나타낼 페이지 수 = 10)
@@ -286,7 +286,6 @@
             timeout: 10000,
             contentType: "application/json",
             success: function (data) {
-
                 // 데이터 그리기
                 const contents = $('#contents');
                 contents.empty();
@@ -405,5 +404,6 @@
 
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="js/material-dashboard.min.js?v=3.0.2"></script>
+
 </body>
 </html>

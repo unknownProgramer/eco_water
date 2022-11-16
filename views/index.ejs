@@ -4,7 +4,7 @@
 let date = new Date();
 let lwlData = data[6][1] - data[0][1];
 let rsqData = data[6][2] - data[0][2];
-let lwlUpDown, rsqUpDown, lwltext, rsqtext, count_date;
+let lwlUpDown, rsqUpDown, lwltext, rsqtext, count_date, water_level;
 let date_list = [];
 let rand_list = [];
 for (let i = 1; i < 8; i++) {
@@ -145,13 +145,6 @@ if (rsqData > 0) {
                     <hr class="mb-1">
                 </div>
                 <!-- 3D 렌더링 캔버스 끝-->
-
-                <!--        <div class="progress">-->
-                <!--          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style=" " aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">-->
-                <!--            여기엔-->
-                <!--            <br>수위 표시-->
-                <!--          </div>-->
-                <!--        </div>-->
 
                 <!-- 수위, 수량 container 시작-->
                 <div class="col">
@@ -592,9 +585,6 @@ if (rsqData > 0) {
           "three": "./build/three.module.js"
         }
       }
-
-
-
 </script>
 <script type="module">
     import * as THREE from 'three';
@@ -604,7 +594,7 @@ if (rsqData > 0) {
     let scene, camera, clock, renderer, water;
     let params = {
         '담수 색상': '#ffffff',
-        '담수 높이': 40
+        '담수 높이': 46
     };
     init();
     animate();
@@ -637,9 +627,9 @@ if (rsqData > 0) {
         height.warpS = height.wrapT = THREE.RepeatWrapping;
 
         // 지면 init
-        const geometry = new THREE.PlaneGeometry(256, 256, 64, 64) // segments 가 높을수록 더 세밀한 오브젝트 생성이 가능
+        const geometry = new THREE.PlaneGeometry(256, 256, 64, 64)
 
-        // 저수지 수심 init ( wireframe : 격자표현 )
+        // 저수지 수심 init
         const material = new THREE.MeshStandardMaterial({
             color: '#ffffff',
             map: texture,

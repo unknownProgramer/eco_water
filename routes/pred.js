@@ -48,6 +48,8 @@ router.get('/search', function (req, res) {
                 list.push((xmlDoc.getElementsByTagName("rsqty")[9].textContent)*1000);
             }catch{}
 
+            console.log(list[0] , list[2]);
+
             const cal_ELm = list[0] * 1;
             const cal_rsqty = list[1] * 1;
 
@@ -56,18 +58,18 @@ router.get('/search', function (req, res) {
             const year_Elm = [];
             const year_rsqty = [];
 
-            const year_Elm_start = [0, 0.3, 0.4, 0.5, 0.7, 0.9, 1.1, 0.9, 0.7, 0.5, 0.3, 0];
-            const year_rsqty_start = [0, 300, 500, 700, 1100, 700, 500, 700, 500, 300, 300, 0];
+            const year_Elm_start = [0, 0.3, 0.4, 0.5, 0.7, 0.9, 1.1, 0.9, 0.7, 0.5, 0.3, 0.1];
+            const year_rsqty_start = [0, 300, 500, 700, 1100, 700, 500, 700, 500, 300, 300, 0.1];
 
             let month_rand_list_Elm = [];
             for (let i = 1; i < 6; i++) {
-                let rand_int = ((Math.floor(Math.random() * 10) + i) + (i * 5)) / 100;
+                let rand_int = ((Math.floor(Math.random() * 10) + i) + (i * 5)) / 100 - 1;
                 month_rand_list_Elm.push(rand_int);
             }
 
             let month_rand_list_rsqty = [];
             for (let i = 1; i < 6; i++) {
-                let rand_int = (Math.floor(Math.random() * 25) + i) + (i * 25);
+                let rand_int = (Math.floor(Math.random() * 25) + i) + (i * 25) - 700;
                 month_rand_list_rsqty.push(rand_int);
             }
 
@@ -148,6 +150,7 @@ router.get('/search', function (req, res) {
         }
     };
     xhr.send('');
+
 })
 
 module.exports = router;
