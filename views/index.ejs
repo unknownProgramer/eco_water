@@ -1,41 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%
-let date = new Date();
-let lwlData = data[6][1] - data[0][1];
-let rsqData = data[6][2] - data[0][2];
-let lwlUpDown, rsqUpDown, lwltext, rsqtext, count_date, water_level;
-let date_list = [];
-let rand_list = [];
-for (let i = 1; i < 8; i++) {
-    let rand_int = (Math.floor(Math.random() * 10) + i) + (i * 10);
-    rand_list.push(rand_int);
-}
-
-for (let i = 1; i < 8; i++) {
-    count_date = parseInt((('0' + date.getDate())).slice(-2)) + i;
-    if (('0' + date.getDate()) == '01') {
-        count_date = '01';
-    }
-    date_list.push(count_date);
-}
-
-if (lwlData > 0) {
-    lwlUpDown = '상승';
-    lwltext = '수위가 평균적으로 상승세에 있습니다.'
-} else {
-    lwlUpDown = '하락';
-    lwltext = '수위가 평균적으로 하락세에 있습니다.'
-    lwlData *= (-1)
-}
-if (rsqData > 0) {
-    rsqUpDown = '상승';
-    rsqtext = '수량이 평균적으로 상승세에 있습니다.'
-} else {
-    rsqUpDown = '하락';
-    rsqtext = '수량이 평균적으로 하락세에 있습니다.'
-    rsqData *= (-1)
-}
+const _0x39bd82=_0x2663;function _0x1afe(){const _0x4b263c=['getDate','56VUZUpJ','8081739MUpqOa','834554bkNiTH','60590oXrwYv','781HKhjnZ','slice','1105443MlsjfE','push','295956sYwiua','805250MCZgbf','8BaHApi','수량이\x20평균적으로\x20하락세에\x20있습니다.','580939baJLoR','2DVCzNf','수위가\x20평균적으로\x20하락세에\x20있습니다.','random','floor','수량이\x20평균적으로\x20상승세에\x20있습니다.'];_0x1afe=function(){return _0x4b263c;};return _0x1afe();}function _0x2663(_0xee90fd,_0x327fe4){const _0x1afeee=_0x1afe();return _0x2663=function(_0x26633e,_0x1a3a96){_0x26633e=_0x26633e-0x143;let _0x37148d=_0x1afeee[_0x26633e];return _0x37148d;},_0x2663(_0xee90fd,_0x327fe4);}(function(_0x5a6d5c,_0x2c1824){const _0x482ac1=_0x2663,_0x15df9f=_0x5a6d5c();while(!![]){try{const _0x279fe2=parseInt(_0x482ac1(0x145))/0x1+parseInt(_0x482ac1(0x146))/0x2*(parseInt(_0x482ac1(0x152))/0x3)+parseInt(_0x482ac1(0x143))/0x4*(parseInt(_0x482ac1(0x155))/0x5)+parseInt(_0x482ac1(0x154))/0x6+-parseInt(_0x482ac1(0x14e))/0x7*(-parseInt(_0x482ac1(0x14c))/0x8)+-parseInt(_0x482ac1(0x14d))/0x9+parseInt(_0x482ac1(0x14f))/0xa*(-parseInt(_0x482ac1(0x150))/0xb);if(_0x279fe2===_0x2c1824)break;else _0x15df9f['push'](_0x15df9f['shift']());}catch(_0x33cde5){_0x15df9f['push'](_0x15df9f['shift']());}}}(_0x1afe,0xc9f68));let date=new Date(),lwlData=data[0x6][0x1]-data[0x0][0x1],rsqData=data[0x6][0x2]-data[0x0][0x2],lwlUpDown,rsqUpDown,lwltext,rsqtext,count_date,water_level,date_list=[],rand_list=[];for(let i=0x1;i<0x8;i++){let rand_int=Math[_0x39bd82(0x149)](Math[_0x39bd82(0x148)]()*0xa)+i+i*0xa;rand_list[_0x39bd82(0x153)](rand_int);}for(let i=0x1;i<0x8;i++){count_date=parseInt(('0'+date[_0x39bd82(0x14b)]())[_0x39bd82(0x151)](-0x2))+i,'0'+date[_0x39bd82(0x14b)]()=='01'&&(count_date='01'),date_list['push'](count_date);}lwlData>0x0?(lwlUpDown='상승',lwltext='수위가\x20평균적으로\x20상승세에\x20있습니다.'):(lwlUpDown='하락',lwltext=_0x39bd82(0x147),lwlData*=-0x1);rsqData>0x0?(rsqUpDown='상승',rsqtext=_0x39bd82(0x14a)):(rsqUpDown='하락',rsqtext=_0x39bd82(0x144),rsqData*=-0x1);
 %>
 <head>
     <%- include ('header.ejs') %>

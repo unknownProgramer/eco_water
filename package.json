@@ -13,6 +13,7 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jquery": "^3.6.1",
+    "jupyter": "^0.0.0",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "node-html-parser": "^6.1.1",
