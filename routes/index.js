@@ -53,7 +53,8 @@ router.get('/', function(req, res, next) {
       }
       res.render('index', {
         data : list,
-        today : today
+        today : today,
+        color : '#99CC99'
       });
     }
   };

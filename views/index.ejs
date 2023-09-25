@@ -102,6 +102,7 @@ const _0x39bd82=_0x2663;function _0x1afe(){const _0x4b263c=['getDate','56VUZUpJ'
                 <div class="col">
                     <canvas id="lender_canvas"></canvas>
                     <hr class="mb-1">
+                    <button id="getDataButton">데이터 가져오기</button>
                     <div class="mx-3 mt-2">
                         <p class="GOTHIC_M mb-0" style="font-size: 14px">사용법</p>
                         <p class="GOTHIC_M mb-0" style="font-size: 14px">마우스 왼쪽 클릭 후 이동 : 객체 상,하,좌,우 회전</p>
@@ -552,6 +553,11 @@ const _0x39bd82=_0x2663;function _0x1afe(){const _0x4b263c=['getDate','56VUZUpJ'
         }
       }
 </script>
+
+<script>
+    const color_result = '<%= color %>';
+</script>
+
 <script type="module">
     import * as THREE from 'three';
     import {OrbitControls} from './jsm/controls/OrbitControls.js';
@@ -559,8 +565,8 @@ const _0x39bd82=_0x2663;function _0x1afe(){const _0x4b263c=['getDate','56VUZUpJ'
 
     let scene, camera, clock, renderer, water;
     let params = {
-        '담수 색상': '#ffffff',
-        '담수 높이': 46
+        '담수 색상': color_result,
+        '담수 높이': 45
     };
     init();
     animate();
@@ -688,6 +694,23 @@ const _0x39bd82=_0x2663;function _0x1afe(){const _0x4b263c=['getDate','56VUZUpJ'
 
     function render() {
         renderer.render(scene, camera);
+    }
+
+    function getLiverColor(){
+        fetch('/get_data')
+        .then(response => response.json())
+        .then(data => {
+            const color_result = data.color_result;
+        })
+        .catch(error => console.error(error));
+    
+    let scene, camera, clock, renderer, water;
+    let params = {
+        '담수 색상': color_result,
+        '담수 높이': 45
+    };
+    init();
+    animate();
     }
 </script>
 
