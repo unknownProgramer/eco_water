@@ -168,11 +168,11 @@
                     <!-- 예측 모듈 시작 -->
                     <div class="col">
                         <div class="mt-5">
-                            <h3 class="GULIM mb-3">평림댐 수질 예측 프로그램</h3>
+                            <h3 class="GULIM mb-3">수질 예측 프로그램</h3>
                             <p class="GOTHIC_M mb-0">평림댐의 수위 및 수량을 예측할수 있는 프로그램입니다.</p>
                             <p class="GOTHIC_M">수위 (EL.m), 저수율 (%), 강우량 (mm), 유입량 (㎥/s), 총방류량 (㎥/s)을 통해 학습된 결과이며, <br>
-                                선택 날짜 기준으로 한달 간격의 수위 및 수량을 예측할 수 있습니다.</p>
-                            <p class="GOTHIC_M mb-0" style="color: red;">절대적인 수치가 아니며, 강우량에 따라 현장의 상황과 상이할 수 있습니다.</p>
+                                그 외 40가지 인수를 추가하여 예측도를 높였습니다.</p>
+                            <p class="GOTHIC_M mb-0" style="color: red;">현장 상황과 상이할 수 있습니다.</p>
                         </div>
                         <div class="cal-box mt-3">
                             <fieldset>
@@ -189,8 +189,9 @@
                                                     </span>
                                                 </span>
                                                 <a class="btn btn-click"
+                                                    id = "predictionButton"
                                                     style="background-color: #0d6efd; color: #ffffff; font-size: 14px; margin-top: 10px;"
-                                                    onclick="">예측하기</a>
+                                                    >예측하기</a>
                                                 <b id="load_pred" class="mx-3"></b>
                                             </div>
                                         </div>
@@ -207,10 +208,10 @@
                                         일자
                                     </td>
                                     <td class="info_td">
-                                        예측 수위 (EL.m)
+                                        예측 결과
                                     </td>
                                     <td class="info_td">
-                                        예측 저수량 (천 ㎥)
+                                        클로로필-a 지수 (㎥)
                                     </td>
                                 </tr>
                             </thead>
@@ -268,10 +269,10 @@
     <!-- 색상지정 -->
     <script>
         function changeColor() {
-            const status = "<%= status %>"; // 문구에 해당하는 변수를 가져옵니다.
-            const set_color = document.getElementById('set_color'); // set_color 태그를 가져옵니다.
+            const status = "<%= status %>"; // 문구에 해당하는 변수를 반환
+            const set_color = document.getElementById('set_color'); // set_color 태그를 가져옴
 
-            // 문구에 따라서 색상을 설정합니다.
+            // 문구에 따라서 색상을 설정
             if (status === '정상') {
                 set_color.style.color = '#00FF00'; 
             } else if (status === '경계') {
@@ -279,7 +280,6 @@
             } else if (status === '발생') {
                 set_color.style.color = '#FF0000';
             } else {
-                // 다른 경우에는 기본 색상 (예: 검정색)을 설정할 수 있습니다.
                 set_color.style.color = '#800080';
             }
         }
@@ -295,8 +295,14 @@
         }
       }
     </script>
-    
+
+    <script>
+        let init_color = '#FFFFFF';
+    </script>
+
     <script type="module" src="js/init_3d.js"></script>
+
+    <script src="js/prediction_program.js"></script>
 
     <!-- calender jQuery-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
