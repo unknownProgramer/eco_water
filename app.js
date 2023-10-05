@@ -10,7 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const infoRouter = require('./routes/info');
 const predRouter = require('./routes/pred');
-const preditRouter = require('./routes/predit');
+const predictionRouter = require('./routes/prediction');
 const noFunctionRouter = require('./routes/noFunction');
 
 const app = express();
@@ -44,7 +44,7 @@ app.use('/', indexRouter);
 app.use('/info', infoRouter);
 app.use('/users', usersRouter);
 app.use('/pred', predRouter);
-app.use('/predit', preditRouter);
+app.use('/prediction', predictionRouter);
 app.use('/noFunction', noFunctionRouter);
 
 // catch 404 and forward to error handler

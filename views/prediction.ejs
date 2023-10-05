@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('header.ejs') %>
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+    <aside
+        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark GOTHIC_M"
+        id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="/">
+                <img src="img/observation-icon.png" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 text-white">평림댐 관측 프로그램</span>
+            </a>
+        </div>
+        <hr class="horizontal light mt-0 mb-2">
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">dashboard</i>
+                        </div>
+                        <span class="nav-link-text ms-1">메인</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/info">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">info</i>
+                        </div>
+                        <span class="nav-link-text ms-1">평림댐 정보</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/pred">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">opacity</i>
+                        </div>
+                        <span class="nav-link-text ms-1">평림댐 수위 / 수량예측</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-white bg-gradient-info" href="/prediction">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">assignment</i>
+                        </div>
+                        <span class="nav-link-text ms-1">평림댐 수질정보 / 예측</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/noFunction">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">adjust</i>
+                        </div>
+                        <span class="nav-link-text ms-1">ECO-SYSTEM 관리</span>
+                    </a>
+                </li>
+                <hr class="horizontal light mt-5 mb-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="/noFunction">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">login</i>
+                        </div>
+                        <span class="nav-link-text ms-1">로그인</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="https://www.ecopeace.kr">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">backup_table</i>
+                        </div>
+                        <span class="nav-link-text ms-1">에코피스 홈페이지 이동</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+        <!-- 전체 container 시작-->
+        <div class="container-fluid px-2 px-md-4">
+
+            <!-- 타이틀 시작 -->
+            <div class="page-header min-height-300 border-radius-xl mt-3"
+                style="background-image: url('img/title.jpg');">
+                <span class="mask GOTHIC_M"
+                    style="color: #ffffff; font-size: 48px; font-weight: 500; margin-top: 120px; padding-left: 30px">수위예측
+                    3D 디스플레이 시스템</span>
+                <span class="mask GOTHIC_M"
+                    style="color: #000000; font-size: 28px; margin-top: 180px; padding-left: 30px">수질정보 / 예측</span>
+            </div>
+            <!-- 타이틀 끝 -->
+
+            <!-- 전체 보드 시작 -->
+            <div class="card card-body mx-3 mx-md-4 mt-n6">
+                <div class="row gx-4 mb-2">
+
+                    <div class="row mt-4 mb-5">
+                        <div class="col">
+                            <div class="card_title GOTHIC_M ml-5" style="text-align: center;">
+                                <h1>오늘의 수질 상태</h1>
+                                <script>
+                                    const currentDate = new Date();
+
+                                    const year = currentDate.getFullYear();
+                                    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 패딩
+                                    const day = String(currentDate.getDate()).padStart(2, '0'); // 일자를 2자리로 패딩
+
+                                    const formattedDate = `${year}년${month}월${day}일 기준`;
+
+                                    document.write(formattedDate);
+                                </script>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card mx-7 GOTHIC_M">
+                                <div class="card-header p-3 pt-2">
+                                    <div
+                                        class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                        <i class="material-icons opacity-10">info</i>
+                                    </div>
+                                    <div class="text-end pt-0">
+                                        <p class="text-xl mb-0">현재 수질 상태</p>
+                                        <div id="pred_month">
+                                            <h4 class="mb-0"><b id="set_color">
+                                                    <%=status%>
+                                                </b> / <b><%=predit_result%></b>㎥</h4>
+                                        </div>
+                                        <p class="text-sm GOTHIC_M text-black-50">클로로필-a 지수</p>
+                                    </div>
+                                </div>
+                                <hr class="dark horizontal my-0">
+                                <div class="card-footer p-3">
+                                    <div id="comment01">
+                                        <p class="text-sm GOTHIC_M text-black-50">녹조 발생예측은 아래 표를 기준으로 정상, 경계, 발생, 대발생 으로
+                                            나뉩니다.</p>
+                                        <p class="text-sm GOTHIC_M text-black-50"><b style="color: #00FF00">■</b>: 0~15
+                                            정상 <b style="color: #FFA500">■</b>: 15~25 경계 <b
+                                                style="color: #FF0000">■</b>: 25~50 발생 <b style="color: #800080">■</b>:
+                                            50~100 대발생 </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D 렌더링 캔버스 시작-->
+                    <div class="col">
+                        <canvas id="lender_canvas"></canvas>
+                        <hr class="mb-1">
+                        <div class="mx-3 mt-2">
+                            <p class="GOTHIC_M mb-0" style="font-size: 14px">사용법</p>
+                            <p class="GOTHIC_M mb-0" style="font-size: 14px">마우스 왼쪽 클릭 후 이동 : 객체 상,하,좌,우 회전</p>
+                            <p class="GOTHIC_M mb-0" style="font-size: 14px">마우스 오른쪽 클릭 후 이동 : 객체 상,하,좌,우 이동</p>
+                            <p class="GOTHIC_M mb-0" style="font-size: 14px">shift + 휠 : 객체 줌 인, 줌 아웃</p>
+                        </div>
+                        <hr class="mb-1">
+                    </div>
+                    <!-- 3D 렌더링 캔버스 끝-->
+
+                    <!-- 예측 모듈 시작 -->
+                    <div class="col">
+                        <div class="mt-5">
+                            <h3 class="GULIM mb-3">평림댐 수질 예측 프로그램</h3>
+                            <p class="GOTHIC_M mb-0">평림댐의 수위 및 수량을 예측할수 있는 프로그램입니다.</p>
+                            <p class="GOTHIC_M">수위 (EL.m), 저수율 (%), 강우량 (mm), 유입량 (㎥/s), 총방류량 (㎥/s)을 통해 학습된 결과이며, <br>
+                                선택 날짜 기준으로 한달 간격의 수위 및 수량을 예측할 수 있습니다.</p>
+                            <p class="GOTHIC_M mb-0" style="color: red;">절대적인 수치가 아니며, 강우량에 따라 현장의 상황과 상이할 수 있습니다.</p>
+                        </div>
+                        <div class="cal-box mt-3">
+                            <fieldset>
+                                <div class="form-group-box card p-3">
+                                    <div class="clearfix">
+
+                                        <div class="row-md-3">
+                                            <div class="col">
+                                                <span class="label GOTHIC_M">예측 시작 날짜</span>
+                                                <span class="input-calender-group">
+                                                    <span class="input-calender">
+                                                        <input type="text" id="datepicker" name="Date"
+                                                            title="날짜 선택하기(예: 2020-01-01)">
+                                                    </span>
+                                                </span>
+                                                <a class="btn btn-click"
+                                                    style="background-color: #0d6efd; color: #ffffff; font-size: 14px; margin-top: 10px;"
+                                                    onclick="">예측하기</a>
+                                                <b id="load_pred" class="mx-3"></b>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <table class="table mt-2" style="text-align: center">
+                            <thead style="background-color: #0d6efd; color: white">
+                                <tr>
+                                    <td class="info_td">
+                                        일자
+                                    </td>
+                                    <td class="info_td">
+                                        예측 수위 (EL.m)
+                                    </td>
+                                    <td class="info_td">
+                                        예측 저수량 (천 ㎥)
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody id="contents"></tbody>
+                        </table>
+
+                    </div>
+
+                    <div class="row mt-4 pt-10">
+                        <!-- blank -->
+                    </div>
+
+                </div>
+            </div>
+            <!-- 전체 보드 끝 -->
+
+        </div>
+
+        <footer class="footer py-4  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                            Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            ECOPEACE All Right Reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!--   Core JS Files   -->
+    <script src="js/core/popper.min.js"></script>
+    <script src="js/core/bootstrap.min.js"></script>
+    <script src="js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="js/plugins/chartjs.min.js"></script>
+
+    <!-- control script-->
+    <script>
+        const win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            const options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+
+    <!-- 색상지정 -->
+    <script>
+        function changeColor() {
+            const status = "<%= status %>"; // 문구에 해당하는 변수를 가져옵니다.
+            const set_color = document.getElementById('set_color'); // set_color 태그를 가져옵니다.
+
+            // 문구에 따라서 색상을 설정합니다.
+            if (status === '정상') {
+                set_color.style.color = '#00FF00'; 
+            } else if (status === '경계') {
+                set_color.style.color = '#FFA500'; 
+            } else if (status === '발생') {
+                set_color.style.color = '#FF0000';
+            } else {
+                // 다른 경우에는 기본 색상 (예: 검정색)을 설정할 수 있습니다.
+                set_color.style.color = '#800080';
+            }
+        }
+
+        window.onload = changeColor();
+    </script>
+
+    <!-- 3D display script -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./build/three.module.js"
+        }
+      }
+    </script>
+    
+    <script type="module" src="js/init_3d.js"></script>
+
+    <!-- calender jQuery-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd'
+                , showMonthAfterYear: true
+                , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                , buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                , buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
+                , yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                , monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] //달력의 월 부분 텍스트
+                , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
+                , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
+                , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']//달력의 요일 부분 Tooltip 텍스트
+
+            });
+        });
+    </script>
+
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="js/material-dashboard.min.js?v=3.0.2"></script>
+</body>
+
+</html>
