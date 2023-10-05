@@ -8,6 +8,9 @@ router.get('/', function(req, res, next) {
   const xhr = new XMLHttpRequest();
   const url = 'http://apis.data.go.kr/B500001/drghtDamOper/operInfoList'; /*URL*/
 
+  const predit = req.query.predit;
+  console.log(predit);
+  
   // 날짜 구하기
   let date = new Date();
   let now_year = date.getFullYear();
@@ -28,6 +31,8 @@ router.get('/', function(req, res, next) {
   queryParams += '&' + encodeURIComponent('damCd') + '=' + encodeURIComponent('5002201'); // 댐 코드 (평림댐 : 5002201)
   queryParams += '&' + encodeURIComponent('stDt') + '=' + encodeURIComponent(search_that_day); // 댐 운영 검색 시작 일자
   queryParams += '&' + encodeURIComponent('edDt') + '=' + encodeURIComponent(today); // 댐 운영 검색 종료 일자
+
+  // 수질예측
 
   xhr.open('GET', url + queryParams);
   xhr.onreadystatechange = function () {
@@ -53,7 +58,8 @@ router.get('/', function(req, res, next) {
       }
       res.render('index', {
         data : list,
-        today : today
+        today : today,
+        color : '#99CC99'
       });
     }
   };
